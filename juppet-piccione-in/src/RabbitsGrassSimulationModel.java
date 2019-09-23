@@ -10,6 +10,11 @@ import uchicago.src.sim.gui.Value2DDisplay;
 import uchicago.src.sim.gui.Object2DDisplay;
 import uchicago.src.sim.engine.BasicAction;
 import uchicago.src.sim.util.SimUtilities;
+import uchicago.src.sim.analysis.DataSource;
+import uchicago.src.sim.analysis.OpenSequenceGraph;
+import uchicago.src.sim.analysis.Sequence;
+import uchicago.src.sim.analysis.BinDataSource;
+import uchicago.src.sim.analysis.OpenHistogram;
 
 
 /**
@@ -44,7 +49,37 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 	private RabbitsGrassSimulationSpace grassSpace;
 	private DisplaySurface displaySurface;
 	private ArrayList rabbitList;
+	private OpenSequenceGraph countParametersInSpace;
+	private OpenHistogram agentWealthDistribution;
 
+	class grassInSpace implements DataSource, Sequence {
+
+		public Object execute() {
+			return new Double(getSValue());
+		}
+
+		public double getSValue() {
+			return (double) grassSpace.getTotalGrass();
+		}
+	}
+
+	class rabbitsInSpace implements DataSource, Sequence {
+
+		public Object execute() {
+			return new Double(getSValue());
+		}
+
+		public double getSValue() {
+			return (double) countLivingRabbits();
+		}
+	}
+
+	class agentEnergy implements BinDataSource{
+		public double getBinValue(Object o) {
+			RabbitsGrassSimulationAgent agent = (RabbitsGrassSimulationAgent)o;
+			return (double)agent.getEnergy();
+		}
+	}
 
 	public int getGridSize() {
 		return gridSize;
@@ -113,9 +148,22 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		}
 		displaySurface = null;
 
+		if (countParametersInSpace != null){
+			countParametersInSpace.dispose();
+		}
+		countParametersInSpace = null;
+
+		if (agentWealthDistribution != null){
+			agentWealthDistribution.dispose();
+		}
+		agentWealthDistribution = null;
+
 		displaySurface = new DisplaySurface(this, "Rabbit Grass Simulation Window 1");
+		countParametersInSpace = new OpenSequenceGraph("Amount Of Grass and Rabbits In Space",this);
+		agentWealthDistribution = new OpenHistogram("Rabbit Energy", 8, 0);
 
 		registerDisplaySurface("Rabbit Grass Simulation Window 1", displaySurface);
+		this.registerMediaProducer("Plot", countParametersInSpace);
     }
 
     public void begin() {
@@ -124,6 +172,8 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
         buildDisplay();
 
 		displaySurface.display();
+		countParametersInSpace.display();
+		agentWealthDistribution.display();
     }
 
     public void buildModel() {
@@ -160,16 +210,31 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 				displaySurface.updateDisplay();
 			}
 		}
-
 		schedule.scheduleActionBeginning(0, new RabbitsGrassSimulationStep());
+
 
 		class RabbitsGrassSimulationCountLiving extends BasicAction {
 			public void execute(){
 				countLivingRabbits();
 			}
 		}
+		schedule.scheduleActionAtInterval(10, new RabbitsGrassSimulationCountLiving());
 
-		schedule.scheduleActionAtInterval(1, new RabbitsGrassSimulationCountLiving());
+
+		class RabbitsGrassSimulationUpdateGrassInSpace extends BasicAction {
+			public void execute(){
+				countParametersInSpace.step();
+			}
+		}
+		schedule.scheduleActionAtInterval(10, new RabbitsGrassSimulationUpdateGrassInSpace());
+
+
+		class RabbitsGrassSimulationUpdateAgentWealth extends BasicAction {
+			public void execute(){
+				agentWealthDistribution.step();
+			}
+		}
+		schedule.scheduleActionAtInterval(10, new RabbitsGrassSimulationUpdateAgentWealth());
     }
 
     public void buildDisplay() {
@@ -190,7 +255,9 @@ public class RabbitsGrassSimulationModel extends SimModelImpl {
 		displaySurface.addDisplayableProbeable(displayGrass, "Grass");
 		displaySurface.addDisplayableProbeable(displayRabbits, "Rabbits");
 
-
+		countParametersInSpace.addSequence("Grass In Space", new grassInSpace());
+		countParametersInSpace.addSequence("Rabbits In Space", new rabbitsInSpace());
+		agentWealthDistribution.createHistogramItem("Rabbit Energy",rabbitList,new agentEnergy());
 	}
 
 	private void addNewRabbit(){
