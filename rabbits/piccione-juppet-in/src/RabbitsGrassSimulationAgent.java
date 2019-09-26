@@ -1,4 +1,7 @@
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+
+import javax.imageio.ImageIO;
 
 import uchicago.src.sim.gui.Drawable;
 import uchicago.src.sim.gui.SimGraphics;
@@ -12,24 +15,33 @@ import uchicago.src.sim.gui.SimGraphics;
 
 public class RabbitsGrassSimulationAgent implements Drawable {
 
-	private static int INIT_ENERGY = 50;
-	private static int EAT_ENERGY = 20;
-	private static int MOVE_ENERGY = -1;
-	private static int STARVING_ENERGY = -1;
+	public static int INIT_ENERGY = 50;
+	public static int EAT_ENERGY = 20;
+	public static int MOVE_ENERGY = 1;
+	public static int STARVING_ENERGY = 1;
 
+	private static BufferedImage rabbitPicture = null;
+	
 	private int x;
 	private int y;
 	private int energy = INIT_ENERGY;
 	
 	private RabbitsGrassSimulationSpace space;
-
+	
 	public RabbitsGrassSimulationAgent(RabbitsGrassSimulationSpace space, int x, int y) {
 		this.space = space;
 		setXY(x, y);
 	}
 
 	public void draw(SimGraphics graphics) {
-		graphics.drawFastRoundRect(Color.GRAY);
+		String imageName = "rabbit-icon.png";
+		try {
+			if(rabbitPicture == null)
+				rabbitPicture = ImageIO.read(this.getClass().getResource(imageName));
+			graphics.drawImageToFit(rabbitPicture);
+		} catch (Exception e) {
+			graphics.drawFastOval(Color.GRAY);
+		}
 	}
 
 	public void setXY(int newX, int newY) {
@@ -83,7 +95,7 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 		int newY = y + dy;
 
 		if(space.moveRabbit(x, y, newX, newY)) {
-			addToEnergy(MOVE_ENERGY);
+			addToEnergy(-MOVE_ENERGY);
 		}
 	}
 
@@ -91,7 +103,7 @@ public class RabbitsGrassSimulationAgent implements Drawable {
 		if(space.eatGrassAt(x, y)) {
 			addToEnergy(EAT_ENERGY);
 		}else {
-			addToEnergy(STARVING_ENERGY);
+			addToEnergy(-STARVING_ENERGY);
 		}
 	}
 }
