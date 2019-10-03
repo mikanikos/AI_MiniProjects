@@ -7,7 +7,7 @@
 	<settings import="config/settings_default.xml" />
 	
 	<!-- load the topology from an external file -->
-	<topology import="config/topology/the_netherlands.xml" />
+	<topology import="config/topology/england.xml" />
 	
 	<!-- load agents from an external file -->
 	<agents import="config/agents.xml" />
@@ -35,7 +35,7 @@
 			<!-- the first vehicle (blue) -->
 			<vehicle name="Reactive">
 				<set color="#0000ff" />
-				<set home="Amsterdam" />
+				<set home="Birmingham" />
 				<set speed="90" />
 				<set capacity="80" />
 				<set cost-per-km="5" />
@@ -46,7 +46,7 @@
 			<!-- the second vehicle (red) -->
 			<vehicle name="Random">
 				<set color="#ff0000" />
-				<set home="Eindhoven" />
+				<set home="Liverpool" />
 				<set speed="90" />
 				<set capacity="80" />
 				<set cost-per-km="5" />
@@ -57,45 +57,45 @@
 			<!-- the third vehicle (green) -->
 			<vehicle name="Greedy">
 				<set color="#00ff00" />
-				<set home="Den Haag" />
+				<set home="London" />
 				<set speed="90" />
 				<set capacity="80" />
 				<set cost-per-km="5" />
 			</vehicle>
 		</company>
 		
-		<company name="Company D">
-			<!-- the fourth vehicle (yellow) -->
-			<vehicle name="Vehicle 4">
-				<set color="#ffff00" />
-				<set home="Apeldoorn" />
-				<set speed="90" />
-				<set capacity="80" />
-				<set cost-per-km="5" />
-			</vehicle>
-		</company>
-		
-		<company name="Company E">
-			<!-- the fifth vehicle (magenta) -->
-			<vehicle name="Vehicle 5">
-				<set color="#ff00ff" />
-				<set home="Utrecht" />
-				<set speed="90" />
-				<set capacity="80" />
-				<set cost-per-km="5" />
-			</vehicle>
-		</company>
-		
-		<company name="Company F">
-			<!-- the sixth vehicle (cyan) -->
-			<vehicle name="Vehicle 6">
-				<set color="#00ffff" />
-				<set home="Groningen" />
-				<set speed="90" />
-				<set capacity="80" />
-				<set cost-per-km="5" />
-			</vehicle>
-		</company>
+<!--		<company name="Company D">-->
+<!--			&lt;!&ndash; the fourth vehicle (yellow) &ndash;&gt;-->
+<!--			<vehicle name="Vehicle 4">-->
+<!--				<set color="#ffff00" />-->
+<!--				<set home="Apeldoorn" />-->
+<!--				<set speed="90" />-->
+<!--				<set capacity="80" />-->
+<!--				<set cost-per-km="5" />-->
+<!--			</vehicle>-->
+<!--		</company>-->
+<!--		-->
+<!--		<company name="Company E">-->
+<!--			&lt;!&ndash; the fifth vehicle (magenta) &ndash;&gt;-->
+<!--			<vehicle name="Vehicle 5">-->
+<!--				<set color="#ff00ff" />-->
+<!--				<set home="Utrecht" />-->
+<!--				<set speed="90" />-->
+<!--				<set capacity="80" />-->
+<!--				<set cost-per-km="5" />-->
+<!--			</vehicle>-->
+<!--		</company>-->
+<!--		-->
+<!--		<company name="Company F">-->
+<!--			&lt;!&ndash; the sixth vehicle (cyan) &ndash;&gt;-->
+<!--			<vehicle name="Vehicle 6">-->
+<!--				<set color="#00ffff" />-->
+<!--				<set home="Groningen" />-->
+<!--				<set speed="90" />-->
+<!--				<set capacity="80" />-->
+<!--				<set cost-per-km="5" />-->
+<!--			</vehicle>-->
+<!--		</company>-->
 		
 	</companies>
 	

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<topology name="england" >
+
+	<!-- the list of cities in the topology -->
+	<cities>
+		<city x="100" y="100" name="Node1"/>
+		<city x="200" y="100" name="Node2"/>
+		<city x="200" y="200" name="Node3"/>
+		<city x="200" y="300" name="Node4"/>
+		<city x="100" y="300" name="Node5"/>
+		<city x="100" y="200" name="Node6"/>
+	</cities>
+
+	<!-- the list of routes in the topology 
+	
+		@note: All distances are given in miles !!!
+	-->
+	<routes>
+		<route distance="100"  from="Node1" to="Node2"/>
+		<route distance="100" from="Node2" to="Node3"/>
+		<route distance="100"  from="Node3" to="Node4"/>
+		<route distance="100"  from="Node4" to="Node5"/>
+		<route distance="100"  from="Node5" to="Node6"/>
+		<route distance="100" from="Node6" to="Node1"/>
+	</routes>
+
+</topology>
