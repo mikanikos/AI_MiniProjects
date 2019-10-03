@@ -15,7 +15,7 @@ import logist.topology.Topology.City;
 
 public class ReactiveAgent implements ReactiveBehavior {
 
-	private HashMap<ReactiveState, ReactiveAction> bestActionForState;
+	private HashMap<ReactiveState, City> bestActionForState;
 	private HashMap<ReactiveState, Double> bestScoreForState;
 	private HashSet<ReactiveState> possibleStates;
 	private HashMap<City, ArrayList<ReactiveState>> accessibleStatesForCity;
@@ -36,7 +36,7 @@ public class ReactiveAgent implements ReactiveBehavior {
 
 		//Init possible states
 		possibleStates = new HashSet<ReactiveState>();
-		bestActionForState = new HashMap<ReactiveState, ReactiveAction>();
+		bestActionForState = new HashMap<ReactiveState, City>();
 		bestScoreForState = new HashMap<ReactiveState, Double>();
 		for(City from : topology) {
 			addState(from, null); // When in from and no task
@@ -50,48 +50,47 @@ public class ReactiveAgent implements ReactiveBehavior {
 		int costPerKm = agent.vehicles().get(0).costPerKm();
 
 		boolean keepUpdating = true;
+		double stop_threshold = 1E-8;
 
 		while(keepUpdating) {
 			keepUpdating = false;
 
 			for(ReactiveState state : possibleStates) {
-				// Can either move to a neighbor ...
-				for(City neighbor : state.getFrom()) {
-					double reward = 0 // No gain since no pick up
-							- state.getFrom().distanceTo(neighbor) * costPerKm; // Cost
+				//Init possible actions for the current state
+				//Can either move to a neighbor or pickup and then move to the delivery city
+				ArrayList<City> possibleActions = new ArrayList<City>();
+				possibleActions.addAll(state.getFrom().neighbors());
 
-					double accumulatedScore = 0;
-					for(ReactiveState accessibleState : accessibleStatesForCity.get(neighbor)) {
-						accumulatedScore += td.probability(accessibleState.getFrom(), accessibleState.getTo())
-								* bestScoreForState.get(accessibleState);
-					}
-					double score = reward + discount * accumulatedScore;
-
-					if(score > bestScoreForState.get(state)) {
-						bestScoreForState.put(state, score);
-						bestActionForState.put(state, new ReactiveAction(neighbor, false));
-						keepUpdating = true;
-					}
-				}
-				
-				// ...or pick up (if there is a task)
 				if(state.getTo() != null) { // If there is a task
-					double reward = td.reward(state.getFrom(), state.getTo())
-							- state.getFrom().distanceTo(state.getTo()) * costPerKm; // Cost
+					possibleActions.add(state.getTo());
+				}
+
+				double bestScore = 0;
+				City bestAction = null;
+				for(City actionCity : possibleActions) {
+					double reward = 0;
+					if(actionCity.equals(state.getTo())) //Pick up so gain some reward
+						reward += td.reward(state.getFrom(), state.getTo());
+					reward -= state.getFrom().distanceTo(actionCity) * costPerKm; // Cost
 
 					double accumulatedScore = 0;
-					for(ReactiveState accessibleState : accessibleStatesForCity.get(state.getTo())) {
+					for(ReactiveState accessibleState : accessibleStatesForCity.get(actionCity)) {
 						accumulatedScore += td.probability(accessibleState.getFrom(), accessibleState.getTo())
 								* bestScoreForState.get(accessibleState);
 					}
 					double score = reward + discount * accumulatedScore;
 
-					if(score > bestScoreForState.get(state)) {
-						bestScoreForState.put(state, score);
-						bestActionForState.put(state, new ReactiveAction(state.getTo(), true));
-						keepUpdating = true;
+					if(bestAction == null || score > bestScore) {
+						bestScore = score;
+						bestAction = actionCity;
 					}
 				}
+
+				if(bestScoreForState.get(state) - bestScore > stop_threshold)
+					keepUpdating = true;
+
+				bestScoreForState.put(state, bestScore);
+				bestActionForState.put(state, bestAction);
 			}
 		}
 	}
@@ -113,11 +112,11 @@ public class ReactiveAgent implements ReactiveBehavior {
 		}
 
 		Action action;
-		ReactiveAction bestAction = bestActionForState.get(state);
-		if(bestAction.isPickingUp()) {
+		City bestAction = bestActionForState.get(state);
+		if(availableTask != null && bestAction.equals(availableTask.deliveryCity)) {
 			action = new Pickup(availableTask);
 		}else {
-			action = new Move(bestAction.getDestination());
+			action = new Move(bestAction);
 		}
 
 		return action;
