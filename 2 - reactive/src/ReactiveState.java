@@ -1,10 +1,12 @@
 import logist.topology.Topology.City;
 
-/*
+/**
  * A state for the value iteration
  * We can be in a city from and either being offered a task to a city
  * or not being offered a task (to is null in this case)
+ * @author Piccione Andrea, Juppet Quentin
  */
+
 public class ReactiveState {
 	private City from;
 	private City to; //If null then no task
