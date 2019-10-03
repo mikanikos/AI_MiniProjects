@@ -9,6 +9,13 @@ import logist.task.TaskDistribution;
 import logist.topology.Topology;
 import logist.topology.Topology.City;
 
+/**
+ * Class that implements a greedy agent that takes the most interesting option at the moment:
+ * when there’s an available task in the city is in, it takes it;
+ * otherwise, if there’s no task available it just goes to the closest city from the current city. 
+ * @author Piccione Andrea, Juppet Quentin
+ */
+
 public class GreedyAgent implements ReactiveBehavior {
 
     private int numActions;

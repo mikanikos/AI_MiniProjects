@@ -13,6 +13,11 @@ import logist.task.TaskDistribution;
 import logist.topology.Topology;
 import logist.topology.Topology.City;
 
+/**
+ * Class that implements the reactive agent
+ * @author Piccione Andrea, Juppet Quentin
+ */
+
 public class ReactiveAgent implements ReactiveBehavior {
 
 	private HashMap<ReactiveState, City> bestActionForState;
@@ -50,7 +55,7 @@ public class ReactiveAgent implements ReactiveBehavior {
 		int costPerKm = agent.vehicles().get(0).costPerKm();
 
 		boolean keepUpdating = true;
-		double stop_threshold = 1E-8;
+		double stopThreshold = 1E-8;
 
 		while(keepUpdating) {
 			keepUpdating = false;
@@ -86,7 +91,7 @@ public class ReactiveAgent implements ReactiveBehavior {
 					}
 				}
 
-				if(bestScoreForState.get(state) - bestScore > stop_threshold)
+				if(bestScoreForState.get(state) - bestScore > stopThreshold)
 					keepUpdating = true;
 
 				bestScoreForState.put(state, bestScore);
