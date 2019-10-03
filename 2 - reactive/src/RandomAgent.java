@@ -11,6 +11,10 @@ import logist.task.TaskDistribution;
 import logist.topology.Topology;
 import logist.topology.Topology.City;
 
+/**
+ * Class that implements a random agent
+ * @author Piccione Andrea, Juppet Quentin
+ */
 public class RandomAgent implements ReactiveBehavior {
 
 	private Random random;
