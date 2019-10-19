@@ -1,5 +1,3 @@
-package deliberative;
-
 import logist.task.Task;
 import logist.topology.Topology;
 

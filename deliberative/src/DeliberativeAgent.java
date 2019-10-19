@@ -1,4 +1,4 @@
-package deliberative;
+
 
 /* import table */
 
@@ -47,24 +47,32 @@ public class DeliberativeAgent implements DeliberativeBehavior {
         // Throws IllegalArgumentException if algorithm is unknown
         algorithm = Algorithm.valueOf(algorithmName.toUpperCase());
 
-        // ...
     }
 
     @Override
     public Plan plan(Vehicle vehicle, TaskSet tasks) {
         Plan plan;
 
+        long start, end;
+
         // Compute the plan with the selected algorithm.
         switch (algorithm) {
             case ASTAR:
+                System.out.println("ASTAR");
+                start = System.currentTimeMillis();
                 plan = aStarPlan(vehicle, tasks);
+                end = System.currentTimeMillis();
                 break;
             case BFS:
+                System.out.println("BFS");
+                start = System.currentTimeMillis();
                 plan = bfsPlan(vehicle, tasks);
+                end = System.currentTimeMillis();
                 break;
             default:
                 throw new AssertionError("Should not happen.");
         }
+        System.out.println((end-start + " milliseconds to generate the plan"));
         return plan;
     }
 

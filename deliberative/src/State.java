@@ -1,5 +1,3 @@
-package deliberative;
-
 import logist.plan.Action;
 import logist.plan.Plan;
 import logist.simulation.Vehicle;
@@ -52,23 +50,14 @@ public class State {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         State state = (State) o;
-
-        for (Task t : tasksTaken) {
-            if (!state.tasksTaken.contains(t))
-                return false;
-        }
-
-        for (Task t : tasksLeft) {
-            if (!state.tasksLeft.contains(t))
-                return false;
-        }
-
-        return currentCity.equals(state.currentCity) && plan.totalDistanceUnits() == state.plan.totalDistanceUnits();
+        return Objects.equals(currentCity, state.currentCity) &&
+                Objects.equals(tasksTaken, state.tasksTaken) &&
+                Objects.equals(tasksLeft, state.tasksLeft);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(currentCity, tasksTaken, tasksLeft, plan, vehicle);
+        return Objects.hash(currentCity, tasksTaken, tasksLeft);
     }
 
     public State getStateCopy() {
@@ -122,13 +111,14 @@ public class State {
 
                 // if there's a task to pick up on the way and there's space available, pick it up
                 for (Task t1 : this.tasksLeft) {
-                    if (t1.pickupCity.equals(c) && this.vehicle.capacity() >= this.getTasksTaken().weightSum() + t1.weight) {
+                    if (t1.pickupCity.equals(c) && newState.getVehicle().capacity() >= newState.getTasksTaken().weightSum() + t1.weight) {
                         newState.getPlan().appendPickup(t1);
                         newState.getTasksLeft().remove(t1);
                         newState.getTasksTaken().add(t1);
                     }
                 }
             }
+            //System.out.println(newState. + "/" + vehicle.capacity());
             newState.currentCity = targetCity;
             successors.add(newState);
         }
