@@ -12,6 +12,8 @@ public class StateComparator implements Comparator<State> {
         double totalCost1 = (heuristicEstimate(s1) + s1.getPlan().totalDistance()) * s1.getVehicle().costPerKm();
         double totalCost2 = (heuristicEstimate(s2) + s2.getPlan().totalDistance()) * s2.getVehicle().costPerKm();
 
+        //System.out.println(totalCost1 + " " + totalCost2);
+
         return Double.compare(totalCost1, totalCost2);
     }
 
@@ -48,7 +50,7 @@ public class StateComparator implements Comparator<State> {
             estimateDistance += minimumDistance;
         }
 
-        return estimateDistance;
+        return estimateDistance / 2;
     }
 
 }

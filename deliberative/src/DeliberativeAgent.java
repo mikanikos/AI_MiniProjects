@@ -83,8 +83,38 @@ public class DeliberativeAgent implements DeliberativeBehavior {
 
 		queue.add(initialState);
 
-		return search(queue);
-	}
+        List<State> visited = new ArrayList<>();
+
+        State n;
+        while ((n = queue.poll()) != null) {
+
+            if ((n.getTasksLeft().isEmpty() && n.getTasksTaken().isEmpty())) {
+                System.out.println(n.getPlan().totalDistance());
+                return n.getPlan();
+            }
+
+            boolean condition = false;
+            State finalN = n;
+            List<State> nStates = visited.stream().filter(x -> x.equals(finalN)).collect(Collectors.toList());
+            if (!nStates.isEmpty()) {
+                State minimumState = Collections.min(nStates, new StateComparator());
+                condition = (new StateComparator().compare(n, minimumState) < 0);
+            }
+
+            //System.out.println(condition);
+
+            if (!visited.contains(n) || condition) {
+                visited.add(n);
+                queue.addAll(n.getSuccessiveStates());
+            }
+
+            //System.out.println(n.getTasksLeft().size() + " " + n.getTasksTaken().size());
+
+        }
+
+        throw new IllegalStateException("Queue empty before computing optimal plan");
+
+    }
 
     private Plan bfsPlan(Vehicle vehicle, TaskSet tasks) {
         State initialState = new State(vehicle.getCurrentCity(), vehicle.getCurrentTasks(), tasks, new Plan(vehicle.getCurrentCity()), vehicle);
@@ -92,40 +122,80 @@ public class DeliberativeAgent implements DeliberativeBehavior {
 
         queue.add(initialState);
 
-        return search(queue);
+        List<State> visited = new ArrayList<>();
+        State bestState = null;
+
+        State n;
+        while ((n = queue.poll()) != null) {
+
+            if ((n.getTasksLeft().isEmpty() && n.getTasksTaken().isEmpty()) && (bestState == null || n.getPlan().totalDistance() < bestState.getPlan().totalDistance())) {
+                bestState = n;
+            }
+
+            if (!visited.contains(n)) {
+                visited.add(n);
+                queue.addAll(n.getSuccessiveStates());
+            }
+
+            //System.out.println(n.getTasksLeft().size() + " " + n.getTasksTaken().size());
+
+        }
+
+        if (bestState == null) {
+            throw new IllegalStateException("Queue empty before computing optimal plan");
+        }
+
+        System.out.println(bestState.getPlan().totalDistance());
+        return bestState.getPlan();
     }
 
-    private Plan search(Queue<State> queue) {
-
-		List<State> visited = new ArrayList<>();
-
-		State n;
-		while ((n = queue.poll()) != null) {
-			if (n.getTasksLeft().isEmpty() && n.getTasksTaken().isEmpty()) {
-				return n.getPlan();
-			}
-
-			boolean condition = true;
-			if (algorithm == Algorithm.ASTAR) {
-                State finalN = n;
-                List<State> nStates = visited.stream().filter(x -> x.equals(finalN)).collect(Collectors.toList());
-                if (!nStates.isEmpty()) {
-                    State minimumState = Collections.min(nStates, new StateComparator());
-                    condition = n.getPlan().totalDistance() < minimumState.getPlan().totalDistance();
-                }
-			}
-
-            if (!visited.contains(n) && condition) {
-				visited.add(n);
-				queue.addAll(n.getSuccessiveStates());
-			}
-			//System.out.println(n.getTasksLeft().size() + " " + n.getTasksTaken().size());
-
-		}
-
-		throw new IllegalStateException("Queue empty before computing optimal plan");
-
-	}
+//    private Plan search(Queue<State> queue) {
+//
+//		List<State> visited = new ArrayList<>();
+//        State bestState = null;
+//
+//		State n;
+//		while ((n = queue.poll()) != null) {
+//
+//            boolean condition = true;
+//
+//            if (algorithm == Algorithm.BFS) {
+//                condition = (bestState == null || n.getPlan().totalDistance() < bestState.getPlan().totalDistance());
+//            }
+//
+//            if ((n.getTasksLeft().isEmpty() && n.getTasksTaken().isEmpty()) && condition) {
+//				bestState = n;
+//                if (algorithm == Algorithm.ASTAR)
+//                    break;
+//            }
+//
+//			if (algorithm == Algorithm.ASTAR) {
+//                State finalN = n;
+//                List<State> nStates = visited.stream().filter(x -> x.equals(finalN)).collect(Collectors.toList());
+//                if (!nStates.isEmpty()) {
+//                    State minimumState = Collections.min(nStates, new StateComparator());
+//                    condition = n.getPlan().totalDistance() < minimumState.getPlan().totalDistance();
+//                }
+//			}
+//
+//            if (!visited.contains(n) && condition) {
+//				visited.add(n);
+//				queue.addAll(n.getSuccessiveStates());
+//			}
+//
+//			//System.out.println(n.getTasksLeft().size() + " " + n.getTasksTaken().size());
+//
+//		}
+//
+//		if (bestState == null) {
+//            throw new IllegalStateException("Queue empty before computing optimal plan");
+//        }
+//
+//		return bestState.getPlan();
+//
+//		//throw new IllegalStateException("Queue empty before computing optimal plan");
+//
+//	}
 
 
     private Plan naivePlan(Vehicle vehicle, TaskSet tasks) {
