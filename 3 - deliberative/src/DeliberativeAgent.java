@@ -1,6 +1,7 @@
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 
 import logist.agent.Agent;
@@ -63,6 +64,8 @@ public class DeliberativeAgent implements DeliberativeBehavior {
 		
 		//Add initial state
 		queue.push(new DeliberativeState(tasks, vehicle.getCurrentCity(), vehicle.getCurrentTasks()));
+		
+		HashMap<DeliberativeState, Double> minCostForState = new HashMap<DeliberativeState, Double>();
 
 		DeliberativeState bestState = null;
 
@@ -71,6 +74,13 @@ public class DeliberativeAgent implements DeliberativeBehavior {
 
 			if(current.getWeight() > vehicle.capacity()) continue;
 			
+			if(minCostForState.containsKey(current)) {
+				double minCost = minCostForState.get(current);
+				if(minCost < current.getCost())
+					continue; //some path is already faster
+			}
+			minCostForState.put(current, current.getCost());
+
 			boolean isComplete = true;
 			for(Task task : tasks) {
 				switch(current.getPossibleAction(task)) {
@@ -93,10 +103,10 @@ public class DeliberativeAgent implements DeliberativeBehavior {
 			}
 
 			if(isComplete) {
-				//if(bestState == null || bestState.getCost() > current.getCost()) {
+				if(bestState == null || bestState.getCost() > current.getCost()) {
 					bestState = current;
-					break;
-				//}
+					//break;
+				}
 			}
 		}
 

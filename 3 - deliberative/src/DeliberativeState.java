@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import java.util.Objects;
+import java.util.Map.Entry;
 
 import logist.task.Task;
 import logist.task.TaskSet;
@@ -92,4 +94,24 @@ public class DeliberativeState {
 		return weight;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(o == null || getClass() != o.getClass()) return false;
+		
+		DeliberativeState state = (DeliberativeState)o;
+		
+		if(!pos.equals(state.getPosition())) return false;
+		for(Entry<Integer, PossibleAction> entry : state.taskPossibleActions.entrySet()) {
+			if(!taskPossibleActions.containsKey(entry.getKey()) || !taskPossibleActions.get(entry.getKey()).equals(entry.getValue()))
+				return false;
+		}
+		
+		return true;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(pos, taskPossibleActions);
+	}
 }
