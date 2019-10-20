@@ -1,9 +1,7 @@
 import logist.task.Task;
 import logist.topology.Topology;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class StateComparator implements Comparator<State> {
     @Override
@@ -27,11 +25,15 @@ public class StateComparator implements Comparator<State> {
             citiesLeft.add(t.deliveryCity);
         }
         for (Task t : s.getTasksLeft()) {
-            citiesLeft.add(t.deliveryCity);
             citiesLeft.add(t.pickupCity);
         }
 
+        if (s.getTasksLeft().isEmpty()) {
+            citiesLeft = new HashSet<>();
+        }
+
         Topology.City currentCity = s.getCurrentCity();
+        citiesLeft.remove(currentCity);
         Topology.City targetCity = null;
 
         double estimateDistance = 0;
@@ -45,12 +47,14 @@ public class StateComparator implements Comparator<State> {
                     targetCity = c;
                 }
             }
+
+            citiesLeft.removeAll(currentCity.pathTo(targetCity));
             currentCity = targetCity;
-            citiesLeft.remove(targetCity);
+            //citiesLeft.remove(targetCity);
             estimateDistance += minimumDistance;
         }
 
-        return estimateDistance / 2;
+        return estimateDistance;
     }
 
 }

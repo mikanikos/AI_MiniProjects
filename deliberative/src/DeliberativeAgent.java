@@ -132,7 +132,21 @@ public class DeliberativeAgent implements DeliberativeBehavior {
                 bestState = n;
             }
 
-            if (!visited.contains(n)) {
+            boolean condition = false;
+            State finalN = n;
+            List<State> nStates = visited.stream().filter(x -> x.equals(finalN)).collect(Collectors.toList());
+            if (!nStates.isEmpty()) {
+                double minimumDistance = Double.MAX_VALUE;
+                for (State s : nStates) {
+                    double distance = s.getPlan().totalDistance();
+                    if (distance < minimumDistance)
+                        minimumDistance = distance;
+                }
+                condition = n.getPlan().totalDistance() < minimumDistance;
+
+            }
+
+            if (!visited.contains(n) || condition) {
                 visited.add(n);
                 queue.addAll(n.getSuccessiveStates());
             }
