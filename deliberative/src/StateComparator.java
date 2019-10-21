@@ -18,43 +18,26 @@ public class StateComparator implements Comparator<State> {
 
     // using distance metric as heuristic function
     private double heuristicEstimate(State s) {
-
-        Set<Topology.City> citiesLeft = new HashSet<>();
-
+        double minimumDistance = Double.MAX_VALUE;
+        
+        //For taken task we need at least to go the delivery city
         for (Task t : s.getTasksTaken()) {
-            citiesLeft.add(t.deliveryCity);
-        }
-        for (Task t : s.getTasksLeft()) {
-            citiesLeft.add(t.pickupCity);
-        }
-
-        if (s.getTasksLeft().isEmpty()) {
-            citiesLeft = new HashSet<>();
-        }
-
-        Topology.City currentCity = s.getCurrentCity();
-        citiesLeft.remove(currentCity);
-        Topology.City targetCity = null;
-
-        double estimateDistance = 0;
-
-        while (!citiesLeft.isEmpty()) {
-            double minimumDistance = Double.MAX_VALUE;
-            for (Topology.City c : citiesLeft) {
-                double distance = currentCity.distanceTo(c);
-                if (distance < minimumDistance) {
-                    minimumDistance = distance;
-                    targetCity = c;
-                }
+        	double curDistance = s.getCurrentCity().distanceTo(t.deliveryCity);
+            if(curDistance < minimumDistance) {
+            	minimumDistance = curDistance;
             }
-
-            citiesLeft.removeAll(currentCity.pathTo(targetCity));
-            currentCity = targetCity;
-            //citiesLeft.remove(targetCity);
-            estimateDistance += minimumDistance;
+        }
+        
+        //For task left, we need at least to go to pick it up and then deliver it
+        for (Task t : s.getTasksLeft()) {
+        	double curDistance = s.getCurrentCity().distanceTo(t.pickupCity);
+        	curDistance += t.pathLength(); //Minimum path between delivery and pickup city
+            if(curDistance < minimumDistance) {
+            	minimumDistance = curDistance;
+            }
         }
 
-        return estimateDistance;
+        return minimumDistance;
     }
 
 }

@@ -101,7 +101,8 @@ public class DeliberativeAgent implements DeliberativeBehavior {
                 condition = (new StateComparator().compare(n, minimumState) < 0);
             }
 
-            //System.out.println(condition);
+            if(condition)
+            	System.out.println(condition);
 
             if (!visited.contains(n) || condition) {
                 visited.add(n);
