@@ -18,12 +18,12 @@ public class StateComparator implements Comparator<State> {
 
     // using distance metric as heuristic function
     private double heuristicEstimate(State s) {
-        double minimumDistance = Double.MAX_VALUE;
+        double minimumDistance = 0;
         
         //For taken task we need at least to go the delivery city
         for (Task t : s.getTasksTaken()) {
         	double curDistance = s.getCurrentCity().distanceTo(t.deliveryCity);
-            if(curDistance < minimumDistance) {
+            if(curDistance > minimumDistance) {
             	minimumDistance = curDistance;
             }
         }
@@ -32,7 +32,7 @@ public class StateComparator implements Comparator<State> {
         for (Task t : s.getTasksLeft()) {
         	double curDistance = s.getCurrentCity().distanceTo(t.pickupCity);
         	curDistance += t.pathLength(); //Minimum path between delivery and pickup city
-            if(curDistance < minimumDistance) {
+            if(curDistance > minimumDistance) {
             	minimumDistance = curDistance;
             }
         }

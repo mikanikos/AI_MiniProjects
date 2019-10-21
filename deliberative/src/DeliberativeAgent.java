@@ -83,7 +83,7 @@ public class DeliberativeAgent implements DeliberativeBehavior {
 
 		queue.add(initialState);
 
-        List<State> visited = new ArrayList<>();
+		HashMap<State, Double> minDistForState = new HashMap<State, Double>();
 
         State n;
         while ((n = queue.poll()) != null) {
@@ -93,21 +93,14 @@ public class DeliberativeAgent implements DeliberativeBehavior {
                 return n.getPlan();
             }
 
-            boolean condition = false;
-            State finalN = n;
-            List<State> nStates = visited.stream().filter(x -> x.equals(finalN)).collect(Collectors.toList());
-            if (!nStates.isEmpty()) {
-                State minimumState = Collections.min(nStates, new StateComparator());
-                condition = (new StateComparator().compare(n, minimumState) < 0);
-            }
+			if(minDistForState.containsKey(n)) {
+				double minCost = minDistForState.get(n);
+				if(minCost < n.getPlan().totalDistance())
+					continue; //some path is already faster
+			}
+			minDistForState.put(n, n.getPlan().totalDistance());
 
-            if(condition)
-            	System.out.println(condition);
-
-            if (!visited.contains(n) || condition) {
-                visited.add(n);
-                queue.addAll(n.getSuccessiveStates());
-            }
+            queue.addAll(n.getSuccessiveStates());
 
             //System.out.println(n.getTasksLeft().size() + " " + n.getTasksTaken().size());
 
@@ -123,9 +116,10 @@ public class DeliberativeAgent implements DeliberativeBehavior {
 
         queue.add(initialState);
 
-        List<State> visited = new ArrayList<>();
         State bestState = null;
 
+		HashMap<State, Double> minDistForState = new HashMap<State, Double>();
+        
         State n;
         while ((n = queue.poll()) != null) {
 
@@ -133,24 +127,14 @@ public class DeliberativeAgent implements DeliberativeBehavior {
                 bestState = n;
             }
 
-            boolean condition = false;
-            State finalN = n;
-            List<State> nStates = visited.stream().filter(x -> x.equals(finalN)).collect(Collectors.toList());
-            if (!nStates.isEmpty()) {
-                double minimumDistance = Double.MAX_VALUE;
-                for (State s : nStates) {
-                    double distance = s.getPlan().totalDistance();
-                    if (distance < minimumDistance)
-                        minimumDistance = distance;
-                }
-                condition = n.getPlan().totalDistance() < minimumDistance;
+			if(minDistForState.containsKey(n)) {
+				double minCost = minDistForState.get(n);
+				if(minCost < n.getPlan().totalDistance())
+					continue; //some path is already faster
+			}
+			minDistForState.put(n, n.getPlan().totalDistance());
 
-            }
-
-            if (!visited.contains(n) || condition) {
-                visited.add(n);
-                queue.addAll(n.getSuccessiveStates());
-            }
+            queue.addAll(n.getSuccessiveStates());
 
             //System.out.println(n.getTasksLeft().size() + " " + n.getTasksTaken().size());
 
