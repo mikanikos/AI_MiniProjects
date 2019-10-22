@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 /**
  * An optimal planner for one vehicle.
+ * @author Piccione Andrea, Juppet Quentin
  */
 @SuppressWarnings("unused")
 public class DeliberativeAgent implements DeliberativeBehavior {

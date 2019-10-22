@@ -8,6 +8,11 @@ import logist.topology.Topology.City;
 
 import java.util.*;
 
+
+/**
+ * The state representation for search algorithms.
+ * @author Piccione Andrea, Juppet Quentin
+ */
 public class State {
 
 	private Topology.City currentCity;

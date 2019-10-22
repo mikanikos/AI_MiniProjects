@@ -1,8 +1,11 @@
 import logist.task.Task;
-import logist.topology.Topology;
 
 import java.util.*;
 
+/**
+ * A comparator for the state of the A-star algorithm.
+ * @author Piccione Andrea, Juppet Quentin
+ */
 public class StateComparator implements Comparator<State> {
     @Override
     public int compare(State s1, State s2) {
