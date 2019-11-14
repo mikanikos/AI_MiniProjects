@@ -38,10 +38,9 @@ public class AuctionAgent implements AuctionBehavior {
 
     private static final double INIT_FACTOR_DISCOUNT = 0.1;
     private static final double MARGINAL_COST_INCREASE_FACTOR = 0.2;
-    private static final double PROB_THRESHOLD = 0.4;
+    private static final double PROB_THRESHOLD = 0.09;
     private static final int ROUND_THRESHOLD = 3;
-
-
+    private static final int MIN_BID = 500;
 
     private List<Task> tasksWon;
     private Map<Integer, EnemyAgent> enemies;
@@ -83,12 +82,14 @@ public class AuctionAgent implements AuctionBehavior {
         this.tasksWon = new ArrayList<>();
         this.currentSolution = new SLSSolution(agent.vehicles());
         this.round = 0;
-        this.bidRate = 1.0;
+        this.bidRate = 0.0;
         this.bidHistory = new ArrayList<>();
         this.enemies = new HashMap<>();
         this.expectedLoadBetweenCities = new HashMap<>();
         this.expectedTaskProbability = new HashMap<>();
         this.expectedProbabilityDeliveryIsPickup = new HashMap<>();
+
+        analyzeDistribution(topology, distribution);
     }
 
     private void analyzeDistribution(Topology topology, TaskDistribution distribution) {
@@ -109,6 +110,7 @@ public class AuctionAgent implements AuctionBehavior {
 
                 probDeliveryPickup += distribution.probability(c2, c1) * cityProbability;
             }
+            //System.out.println(probDeliveryPickup);
             expectedProbabilityDeliveryIsPickup.put(c1, probDeliveryPickup);
         }
 
@@ -143,12 +145,22 @@ public class AuctionAgent implements AuctionBehavior {
             // we won, increase request for next time
             this.bidRate += 0.1;
 
+            if (bids[winner] + 1000 < Collections.max(Arrays.asList(bids))) {
+                this.bidRate += 0.2;
+            }
+
+
         } else {
             System.out.println("Winner round " + round + " : " + winner);
 
             enemies.get(winner).getTasksWon().add(previous);
             // we lost, decrease request for next time
-            this.bidRate -= 0.1;
+            this.bidRate -= 0.2;
+
+            if (bids[winner] + 1000 < bids[agent.id()]) {
+                this.bidRate -= 0.2;
+            }
+
         }
 
         this.round++;
@@ -194,36 +206,57 @@ public class AuctionAgent implements AuctionBehavior {
 
         SLSSolution solution = SLS.Solve(this.agent.vehicles(), possibleTasks, planTimeout);
         double marginal_cost = solution.getCost(this.agent.vehicles()) - currentSolution.getCost(this.agent.vehicles());
+        currentSolution = solution;
 
-        // increase it a bit on order to make profit
-        marginal_cost *= Math.min(1 + MARGINAL_COST_INCREASE_FACTOR, bidRate);
+//        // increase it a bit in order to make profit
+//        marginal_cost *= (1 + MARGINAL_COST_INCREASE_FACTOR - bidRate);
 
-        // cost from pickup to delivery city (doesn't count moving to pickup)
-        double minimalBid = task.pathLength() * selectedVehicle.costPerKm();
+        // cost from current to pickup and to pickup to delivery city
+        long distanceSum = task.pickupCity.distanceUnitsTo(task.deliveryCity) + currentCity.distanceUnitsTo(task.pickupCity);
+        double minimalBid = Measures.unitsToKM(distanceSum * selectedVehicle.costPerKm());
 
-        // if first rounds or still need to get first tasks, try to ask for a low price so that I can get well started
-        if (this.round + tasksWon.size() < ROUND_THRESHOLD * 2 || tasksWon.size() < this.round / 2) {
-            marginal_cost -= marginal_cost * INIT_FACTOR_DISCOUNT;
-        }
-
-        // random trials just to look at the effects, still need to refine strategy
-        if (expectedProbabilityDeliveryIsPickup.getOrDefault(task.deliveryCity, 0.0) > PROB_THRESHOLD) {
-            marginal_cost -= marginal_cost * MARGINAL_COST_INCREASE_FACTOR;
-        }
-
-        if (expectedTaskProbability.getOrDefault(new PickupDelivery(task.pickupCity, task.deliveryCity), 0.0) > PROB_THRESHOLD) {
-            marginal_cost -= marginal_cost * MARGINAL_COST_INCREASE_FACTOR;
-        }
-
-        if (bestEnemyBid < marginal_cost && tasksWon.size() < this.round / 2) {
-            marginal_cost = minimalBid + marginal_cost * MARGINAL_COST_INCREASE_FACTOR;
-        }
-
-        if (this.round > 7 && getEnemyWithMoreTasksWon().getTasksWon().size() > tasksWon.size() + 5) {
+        System.out.println("Marginal cost: " + marginal_cost);
+        if (minimalBid - marginal_cost > 1500) {
             marginal_cost = minimalBid;
         }
 
-        return (long) Math.max(marginal_cost, minimalBid);
+        // increase it a bit in order to make profit
+        double rate = (MARGINAL_COST_INCREASE_FACTOR + bidRate);
+
+        // if first rounds or still need to get first tasks, try to ask for a low price so that I can get well started
+        if (this.round + tasksWon.size() < ROUND_THRESHOLD * 2 || tasksWon.size() < this.round / 3) {
+            rate -= INIT_FACTOR_DISCOUNT;
+        }
+
+        System.out.println("Probability: " + expectedProbabilityDeliveryIsPickup.getOrDefault(task.deliveryCity, 0.0));
+        if (expectedProbabilityDeliveryIsPickup.getOrDefault(task.deliveryCity, 0.0) > PROB_THRESHOLD) {
+            rate -= 0.2;
+        }
+
+        System.out.println("Best enemy bid: " + bestEnemyBid);
+        if (round > 5 && (bestEnemyBid + 1000 < marginal_cost || getEnemyWithMoreTasksWon().getTasksWon().size() > tasksWon.size() + 5)) {
+            rate -= 0.3;
+        }
+
+        if (round > 5 && bestEnemyBid - 1000 > marginal_cost) {
+            rate += 0.2;
+        }
+
+        System.out.println("rate: " + rate);
+
+        if (rate <= -1) {
+            rate = 0.3;
+        }
+
+        if (rate >= 3) {
+            rate = 2;
+        }
+
+        marginal_cost *= (1 + rate);
+
+        System.out.println("Marginal cost: " + marginal_cost);
+        System.out.println("Minimal bid: " + minimalBid);
+        return (long) Math.max(Math.max(marginal_cost, minimalBid), MIN_BID);
     }
 
     public EnemyAgent getEnemyWithMoreTasksWon() {
