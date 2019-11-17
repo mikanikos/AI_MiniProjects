@@ -1,5 +1,3 @@
-
-
 import java.util.List;
 
 import logist.agent.Agent;
@@ -10,6 +8,10 @@ import logist.task.TaskDistribution;
 import logist.task.TaskSet;
 import logist.topology.Topology;
 
+/**
+ * Class that implements the centralized agent
+ * @author Piccione Andrea, Juppet Quentin
+ */
 public class CentralizedAgent implements CentralizedBehavior{
 
     @Override

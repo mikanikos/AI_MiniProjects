@@ -6,6 +6,8 @@ import java.util.Map.Entry;
 
 import logist.plan.Plan;
 import logist.simulation.Vehicle;
+import logist.task.Task;
+import logist.task.TaskSet;
 import logist.topology.Topology.City;
 
 /**
@@ -13,9 +15,12 @@ import logist.topology.Topology.City;
  * @author Piccione Andrea, Juppet Quentin
  */
 public class SLSSolution {
+	private List<Vehicle> vehicles;
 	private Map<Vehicle, List<SLSState>> vehicleNextStates;
+	private double cost = 0.0;
 
 	public SLSSolution(List<Vehicle> vehicles) {
+		this.vehicles = vehicles;
 		vehicleNextStates = new HashMap<Vehicle, List<SLSState>>();
 		
 		for(Vehicle v : vehicles) {
@@ -25,12 +30,18 @@ public class SLSSolution {
 	
 	//Copy
 	public SLSSolution(SLSSolution solution) {
+		this.vehicles = solution.vehicles;
+		this.cost = solution.cost;
 		this.vehicleNextStates = new HashMap<Vehicle, List<SLSState>>(solution.vehicleNextStates);
 		for(Entry<Vehicle, List<SLSState>> entry : solution.vehicleNextStates.entrySet()) {
 			vehicleNextStates.put(entry.getKey(), new ArrayList<SLSState>(entry.getValue()));
 		}
 	}
 
+	public List<Vehicle> getVehicles(){
+		return vehicles;
+	}
+	
 	public List<SLSState> getNextStates(Vehicle v){
 		return vehicleNextStates.get(v);
 	}
@@ -39,7 +50,7 @@ public class SLSSolution {
 		vehicleNextStates.put(v, nextStates);
 	}
 
-	public List<Plan> getPlans(List<Vehicle> vehicles) {
+	public List<Plan> getPlans(Map<Integer, Task> intToTask) {
 		List<Plan> plans = new ArrayList<Plan>();
 
 		for(Vehicle v : vehicles) {
@@ -56,9 +67,9 @@ public class SLSSolution {
 				currentCity = targetCity;
 
 				if(s.isPickup()) {
-					plan.appendPickup(s.getTask());
+					plan.appendPickup(intToTask.get(s.getTask().id));
 				}else {
-					plan.appendDelivery(s.getTask());
+					plan.appendDelivery(intToTask.get(s.getTask().id));
 				}
 			}
 			plans.add(plan);
@@ -66,9 +77,9 @@ public class SLSSolution {
 
 		return plans;
 	}
-
-	public double getCost(List<Vehicle> vehicles) {
-		double cost = 0.0;
+	
+	public void updateCost() {
+		cost = 0.0;
 		for(Vehicle v : vehicles) {
 			City currentCity = v.getCurrentCity();
 			List<SLSState> nextStates = getNextStates(v);
@@ -79,10 +90,12 @@ public class SLSSolution {
 				currentCity = sCity;
 			}
 		}
-
-		return cost;
 	}
 
+	public double getCost() {
+		return cost;
+	}
+	
 	public void printPath(Vehicle v) {
 		List<SLSState> nextStates = getNextStates(v);
 		
