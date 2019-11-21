@@ -17,6 +17,10 @@ import logist.task.TaskSet;
 import logist.topology.Topology;
 import logist.topology.Topology.City;
 
+/**
+ * The auction agent
+ * @author Piccione Andrea, Juppet Quentin
+ */
 public class AuctionAgent implements AuctionBehavior{
 
 	private static final double PREDICTION_ERROR_MEAN_NUMBER = 5;
@@ -72,7 +76,7 @@ public class AuctionAgent implements AuctionBehavior{
 
 		highestCostPerKm = 0;
 		for(Vehicle v : agent.vehicles()) {
-			if(v.costPerKm() > highestCostPerKm || highestCostPerKm == 0)
+			if(v.costPerKm() > highestCostPerKm)
 				highestCostPerKm = v.costPerKm();
 		}
 
@@ -107,19 +111,19 @@ public class AuctionAgent implements AuctionBehavior{
 				ennemyMarginalCost = marginalCost;
 				ennemyMarginalCost *= meanEnnemyPredictionError;
 
-				if(marginalCost > 0) {
-					ennemyEstimatedBid = marginalCost;
+				if(ennemyMarginalCost > 0) {
+					ennemyEstimatedBid = ennemyMarginalCost;
 				}else {
 					ennemyEstimatedBid = -1;
 				}
 			}else {
 				myMarginalCost = marginalCost;
 			}
-			
 		}
+		
 		System.out.println("My marginal cost " + myMarginalCost + " and estimate " + ennemyMarginalCost);
 
-		if(ennemyMarginalCost <= myMarginalCost) {
+		if(ennemyMarginalCost <= myMarginalCost && ennemyEstimatedBid > 0) {
 			double marginalCostDif = myMarginalCost - (ennemyMarginalCost  * SAFETY_BID_FROM_ENNEMY);
 			
 			double moneyDif = availableMoney.get(agent.id()) - availableMoney.get(ennemyId);
@@ -145,7 +149,6 @@ public class AuctionAgent implements AuctionBehavior{
 		if(bid <= 0)
 			bid = 1;
 		
-		
 		return bid;
 	}
 
@@ -160,7 +163,7 @@ public class AuctionAgent implements AuctionBehavior{
 		availableMoney.put(lastWinner, winnerMoney);
 		
 		//Update ennemy error
-		if(ennemyEstimatedBid >=0) {
+		if(ennemyEstimatedBid > 0) {
 			double error = lastOffers[ennemyId] / ennemyEstimatedBid;
 			ennemyPredictionError.add(error);
 			

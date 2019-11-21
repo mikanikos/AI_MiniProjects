@@ -2,10 +2,10 @@
 
 <history configuration="config\auction.xml">
 	<agents>
-		<agent name="auction-main-24">
+		<agent name="dummy">
 			<vehicle name="Vehicle 1"/>
 			<vehicle name="Vehicle 2"/>
 		</agent>
-		<agent name="dummy">
+		<agent name="auction-main-24">
 			<vehicle name="Vehicle 3"/>
 			<vehicle name="Vehicle 4"/>
