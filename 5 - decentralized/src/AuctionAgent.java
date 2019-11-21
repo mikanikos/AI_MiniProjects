@@ -29,6 +29,7 @@ public class AuctionAgent implements AuctionBehavior{
 	private static final double SAFETY_BID_FROM_ENNEMY = 0.9;
 	private static final double TASK_INTEREST_PROBA_THRESHOLD = 0.09;
 	private static final double TASK_INTEREST_REDUCE_FACTOR = 0.8;
+	private static final double ERROR_OUTLIER_VALUE = 0.33;
 
 	private Topology topology;
 	private TaskDistribution distribution;
@@ -94,6 +95,8 @@ public class AuctionAgent implements AuctionBehavior{
 
 			possibleSolutions.put(id, possibleSolution);
 
+			System.out.println("agent " + id + " " + possibleSolution.getCost() + " " + currentSolution.getCost());
+			
 			double marginalCost = possibleSolution.getCost() - currentSolution.getCost();
 			
 			double maxProbInterest = 0.0;
@@ -112,7 +115,7 @@ public class AuctionAgent implements AuctionBehavior{
 				ennemyMarginalCost *= meanEnnemyPredictionError;
 
 				if(ennemyMarginalCost > 0) {
-					ennemyEstimatedBid = ennemyMarginalCost;
+					ennemyEstimatedBid = marginalCost;
 				}else {
 					ennemyEstimatedBid = -1;
 				}
@@ -166,7 +169,9 @@ public class AuctionAgent implements AuctionBehavior{
 		//Update ennemy error
 		if(ennemyEstimatedBid > 0) {
 			double error = lastOffers[ennemyId] / ennemyEstimatedBid;
-			ennemyPredictionError.add(error);
+			
+			if(error > ERROR_OUTLIER_VALUE && error < 1/ERROR_OUTLIER_VALUE)
+				ennemyPredictionError.add(error);
 			
 			if(ennemyPredictionError.size() > PREDICTION_ERROR_MEAN_NUMBER) {
 				ennemyPredictionError.remove(0);
