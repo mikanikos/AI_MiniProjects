@@ -10,12 +10,13 @@ import logist.task.Task;
  * @author Piccione Andrea, Juppet Quentin
  */
 public class SLS {
-	private static final int MAX_ITERATIONS = 1000;
+	// ADD MARGIN JUST TO BE SURE TO FINISH IN TIME
+	private static final int TIMEOUT_MARGIN = 500;
 	private static final double PROBABILITY = 0.5;
 	
 	private static SLSSolution bestSolution;
 
-	public static SLSSolution Solve(SLSSolution currentSolution, Random random) {
+	public static SLSSolution Solve(SLSSolution currentSolution, Random random, long timeout) {
 		long startTime = System.currentTimeMillis();
 
 		bestSolution = currentSolution;
@@ -24,7 +25,7 @@ public class SLS {
 		long totalLocal = 0;
 
 		long endTime = System.currentTimeMillis();
-		for(int i = 0; i < MAX_ITERATIONS; ++i) {
+		while(System.currentTimeMillis() - startTime < timeout - TIMEOUT_MARGIN) {
 			List<SLSSolution> neighbours = chooseNeighbours(currentSolution, random);
 
 			long time1 = System.currentTimeMillis();

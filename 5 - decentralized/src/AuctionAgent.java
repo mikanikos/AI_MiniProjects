@@ -1,9 +1,12 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import logist.LogistPlatform;
+import logist.LogistSettings;
 import logist.agent.Agent;
 import logist.behavior.AuctionBehavior;
 import logist.plan.Plan;
@@ -15,6 +18,14 @@ import logist.topology.Topology;
 import logist.topology.Topology.City;
 
 public class AuctionAgent implements AuctionBehavior{
+
+	private static final double PREDICTION_ERROR_MEAN_NUMBER = 5;
+	private static final double FIRST_ROUNDS_LIMIT = 5;
+	private static final double SAFETY_BID_FROM_ENNEMY_FIRST_ROUNDS = 0.75;
+	private static final double SAFETY_BID_FROM_ENNEMY = 0.9;
+	private static final double TASK_INTEREST_PROBA_THRESHOLD = 0.09;
+	private static final double TASK_INTEREST_REDUCE_FACTOR = 0.8;
+
 	private Topology topology;
 	private TaskDistribution distribution;
 	private Random random;
@@ -23,10 +34,15 @@ public class AuctionAgent implements AuctionBehavior{
 	private Map<Integer, SLSSolution> currentSolutions;
 	private Map<Integer, SLSSolution> possibleSolutions;
 	private Map<Integer, Long> availableMoney;
-	private Map<Integer, Double> predictionError;
-	private Map<Integer, Double> estimatedBid;
-
-	private boolean isFirstRound = true;
+	private List<Double> ennemyPredictionError;
+	private double meanEnnemyPredictionError = 1.0;
+	private double ennemyEstimatedBid;
+	private int ennemyId;
+	private double highestCostPerKm;
+	private int currentRound = 0;
+	
+	private long bidTimeout;
+	private long planTimeout;
 
 	@Override
 	public void setup(Topology topology, TaskDistribution distribution, Agent agent) {
@@ -40,115 +56,126 @@ public class AuctionAgent implements AuctionBehavior{
 		currentSolutions = new HashMap<Integer, SLSSolution>();
 		possibleSolutions = new HashMap<Integer, SLSSolution>();
 		availableMoney = new HashMap<Integer, Long>();
-		predictionError = new HashMap<Integer, Double>();
-		estimatedBid = new HashMap<Integer, Double>();
+		ennemyPredictionError = new ArrayList<Double>();
 
-		currentSolutions.put(agent.id(), new SLSSolution(agent.vehicles()));
-		availableMoney.put(agent.id(), 0L);
-		predictionError.put(agent.id(), 1.0);
+		bidTimeout = LogistPlatform.getSettings().get(LogistSettings.TimeoutKey.BID);
+		planTimeout = LogistPlatform.getSettings().get(LogistSettings.TimeoutKey.PLAN);
+		
+		SLSSolution initialSolution = new SLSSolution(agent.vehicles());
+		
+		ennemyId = 1 - agent.id();
+		
+		for(int id = 0; id <= 1; ++id) {
+			currentSolutions.put(id, initialSolution);
+			availableMoney.put(id, 0L);
+		}
+
+		highestCostPerKm = 0;
+		for(Vehicle v : agent.vehicles()) {
+			if(v.costPerKm() > highestCostPerKm || highestCostPerKm == 0)
+				highestCostPerKm = v.costPerKm();
+		}
+
 	}
 
 	@Override
 	public Long askPrice(Task task) {
-
-		double highestCostPerKm = 0;
-		for(Vehicle v : agent.vehicles()) {
-			highestCostPerKm += v.costPerKm();
-		}
-
-		double taskInterest = 0.0;
-		double rewardExpectationAfterTask = 0.0;
-		for(City c : topology.cities()) {
-			double reward = distribution.reward(task.deliveryCity, c) - task.deliveryCity.distanceTo(c) * highestCostPerKm;
-			rewardExpectationAfterTask += distribution.probability(task.deliveryCity, c) * reward;
-
-			taskInterest += distribution.probability(c, task.pickupCity);
-		}
-
 		double myMarginalCost = 0;
-		double minEnemyMarginalCost = 0;
+		double ennemyMarginalCost = 0;
 
-		for(Entry<Integer, SLSSolution> entry : currentSolutions.entrySet()) {
-			SLSSolution possibleSolution = SLS.addTaskInSolution(entry.getValue(), task);
-			possibleSolution = SLS.Solve(possibleSolution, random);
+		for(int id = 0; id <= 1; ++id) {
+			SLSSolution currentSolution = currentSolutions.get(id);
+			SLSSolution possibleSolution = SLS.addTaskInSolution(currentSolution, task);
+			possibleSolution = SLS.Solve(possibleSolution, random, bidTimeout / 2);
 
-			possibleSolutions.put(entry.getKey(), possibleSolution);
+			possibleSolutions.put(id, possibleSolution);
 
-			double marginalCost = possibleSolution.getCost() - entry.getValue().getCost();
-			//marginalCost *= predictionError.get(entry.getKey());
+			double marginalCost = possibleSolution.getCost() - currentSolution.getCost();
 			
-			if(entry.getKey() != agent.id()) {
-				System.out.println("Agent " + entry.getKey() + " estimate " + marginalCost);
+			double maxProbInterest = 0.0;
+			for(Task t : currentSolution.getTasks()) {
+				double p = distribution.probability(t.deliveryCity, task.pickupCity);
+				if(p > maxProbInterest)
+					maxProbInterest = p;
+			}
+
+			if(maxProbInterest > TASK_INTEREST_PROBA_THRESHOLD) {
+				marginalCost *= TASK_INTEREST_REDUCE_FACTOR;
+			}
+			
+			if(id == ennemyId) {
+				ennemyMarginalCost = marginalCost;
+				ennemyMarginalCost *= meanEnnemyPredictionError;
+
 				if(marginalCost > 0) {
-					estimatedBid.put(entry.getKey(), marginalCost);
-					if(marginalCost < minEnemyMarginalCost || minEnemyMarginalCost == 0) {
-						minEnemyMarginalCost = marginalCost;
-					}
+					ennemyEstimatedBid = marginalCost;
 				}else {
-					estimatedBid.put(entry.getKey(), -1.0);
+					ennemyEstimatedBid = -1;
 				}
 			}else {
 				myMarginalCost = marginalCost;
 			}
+			
 		}
+		System.out.println("My marginal cost " + myMarginalCost + " and estimate " + ennemyMarginalCost);
 
-		if(!isFirstRound) { // When has information about enemy (no first round)
-			if(minEnemyMarginalCost <= myMarginalCost) {
-				double marginalCostDif = myMarginalCost - minEnemyMarginalCost - 1; // Minus 1 to be best
-
-				if(rewardExpectationAfterTask > marginalCostDif) { //If can be interesting to get the task for potential next task
-					if(availableMoney.get(agent.id()) > marginalCostDif) { //If has save enough money can afford to earn less this time
-						myMarginalCost -= marginalCostDif;
-					}
-				}
-			}else { //Try to get has much money has possible
-				myMarginalCost = minEnemyMarginalCost - 1;
+		if(ennemyMarginalCost <= myMarginalCost) {
+			double marginalCostDif = myMarginalCost - (ennemyMarginalCost  * SAFETY_BID_FROM_ENNEMY);
+			
+			double moneyDif = availableMoney.get(agent.id()) - availableMoney.get(ennemyId);
+			
+			if(moneyDif > marginalCostDif) {
+				myMarginalCost -= marginalCostDif;
 			}
+		}else { //Try to get has much money has possible
+			double newMarginalCost;
+			
+			if(currentRound < FIRST_ROUNDS_LIMIT) {
+				newMarginalCost = ennemyMarginalCost * SAFETY_BID_FROM_ENNEMY_FIRST_ROUNDS;
+			}else {
+				newMarginalCost = ennemyMarginalCost * SAFETY_BID_FROM_ENNEMY;
+			}
+			
+			if(newMarginalCost > myMarginalCost)
+				myMarginalCost = newMarginalCost;
 		}
 
 		long bid = (long)Math.ceil(myMarginalCost);
 
-		if(bid < 0)
-			return null;
-
+		if(bid <= 0)
+			bid = 1;
+		
+		
 		return bid;
 	}
 
 	@Override
 	public void auctionResult(Task lastTask, int lastWinner, Long[] lastOffers) {
-		if(isFirstRound) {
-			SLSSolution initialSolution = new SLSSolution(agent.vehicles());
-
-			for(int id = 0; id < lastOffers.length; ++id) {
-				currentSolutions.put(id, initialSolution);
-				availableMoney.put(id, 0L);
-				estimatedBid.put(id, -1.0);
-				predictionError.put(id, 1.0);
-			}
-			currentSolutions.put(lastWinner, possibleSolutions.get(agent.id()));
-
-			isFirstRound = false;
-		}else {
-			currentSolutions.put(lastWinner, possibleSolutions.get(lastWinner));
-		}
-		if(lastWinner == agent.id())
-			System.out.println("Agent " + lastWinner + " win task " + lastTask.id);
-
-		System.out.println("Agent " + (1 - agent.id()) + " offer " + lastOffers[1 - agent.id()] + " estimated " + estimatedBid.get(1 - agent.id()) + " error " + predictionError.get(1 - agent.id()));
+		System.out.println("Winner is " + lastWinner + " my bid " + lastOffers[agent.id()] + " ennemy bid " + lastOffers[ennemyId]);
+		currentSolutions.put(lastWinner, possibleSolutions.get(lastWinner));
 
 		//Update winner money
 		Long winnerMoney = availableMoney.get(lastWinner);
 		winnerMoney += lastOffers[lastWinner];
 		availableMoney.put(lastWinner, winnerMoney);
 		
-		for(int id = 0; id < lastOffers.length; ++id) {
-			if(id == agent.id()) continue; // Should stay 1 for agent since no error
-			if(lastOffers[id] == null) continue; // error should stay same (otherwise infinite error)
-			if(estimatedBid.get(id) < 0) continue; // error should stay same (otherwise infinite error)
+		//Update ennemy error
+		if(ennemyEstimatedBid >=0) {
+			double error = lastOffers[ennemyId] / ennemyEstimatedBid;
+			ennemyPredictionError.add(error);
 			
-			double error = lastOffers[id] / estimatedBid.get(id);
-			predictionError.put(id, error);
+			if(ennemyPredictionError.size() > PREDICTION_ERROR_MEAN_NUMBER) {
+				ennemyPredictionError.remove(0);
+			}
+			
+			meanEnnemyPredictionError = 0.0;
+			for(Double e : ennemyPredictionError) {
+				meanEnnemyPredictionError += e;
+			}
+			meanEnnemyPredictionError /= ennemyPredictionError.size();
 		}
+		
+		++currentRound;
 	}
 
 	@Override
@@ -157,6 +184,9 @@ public class AuctionAgent implements AuctionBehavior{
 		for(Task task : tasks) {
 			intToTask.put(task.id, task);
 		}
-		return currentSolutions.get(agent.id()).getPlans(intToTask);
+		
+		SLSSolution finalSolution = SLS.Solve(currentSolutions.get(agent.id()), random, planTimeout);
+		
+		return finalSolution.getPlans(intToTask);
 	}
 }

@@ -96,6 +96,18 @@ public class SLSSolution {
 		return cost;
 	}
 	
+	public List<Task> getTasks(){
+		List<Task> tasks = new ArrayList<Task>();
+		for(Vehicle v : vehicles) {
+			for(SLSState s : vehicleNextStates.get(v)) {
+				if(s.isPickup()) {
+					tasks.add(s.getTask());
+				}
+			}
+		}
+		return tasks;
+	}
+	
 	public void printPath(Vehicle v) {
 		List<SLSState> nextStates = getNextStates(v);
 		
