@@ -126,7 +126,8 @@ public class AuctionAgent implements AuctionBehavior{
 		if(ennemyMarginalCost <= myMarginalCost && ennemyEstimatedBid > 0) {
 			double marginalCostDif = myMarginalCost - (ennemyMarginalCost  * SAFETY_BID_FROM_ENNEMY);
 			
-			double moneyDif = availableMoney.get(agent.id()) - availableMoney.get(ennemyId);
+			double moneyDif = (availableMoney.get(agent.id()) - currentSolutions.get(agent.id()).getCost())
+							- (availableMoney.get(ennemyId) - currentSolutions.get(ennemyId).getCost());
 			
 			if(moneyDif > marginalCostDif) {
 				myMarginalCost -= marginalCostDif;
