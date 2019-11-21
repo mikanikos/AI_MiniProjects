@@ -5,3 +5,7 @@ bin/
 .classpath
 .project
 .DS_Store
+out/
+agents/
+META-INF/
+tournament/
