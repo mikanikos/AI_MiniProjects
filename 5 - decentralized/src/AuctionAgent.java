@@ -46,6 +46,8 @@ public class AuctionAgent implements AuctionBehavior{
 	private double highestCostPerKm;
 	private int currentRound = 0;
 	
+	private long minimumEnemyBid = 500;
+	
 	private long bidTimeout;
 	private long planTimeout;
 
@@ -94,8 +96,6 @@ public class AuctionAgent implements AuctionBehavior{
 			possibleSolution = SLS.Solve(possibleSolution, random, bidTimeout / 2);
 
 			possibleSolutions.put(id, possibleSolution);
-
-			System.out.println("agent " + id + " " + possibleSolution.getCost() + " " + currentSolution.getCost());
 			
 			double marginalCost = possibleSolution.getCost() - currentSolution.getCost();
 			
@@ -114,6 +114,9 @@ public class AuctionAgent implements AuctionBehavior{
 				ennemyMarginalCost = marginalCost;
 				ennemyMarginalCost *= meanEnnemyPredictionError;
 
+				if(ennemyMarginalCost < minimumEnemyBid)
+					ennemyMarginalCost = minimumEnemyBid;
+				
 				if(ennemyMarginalCost > 0) {
 					ennemyEstimatedBid = marginalCost;
 				}else {
@@ -124,6 +127,7 @@ public class AuctionAgent implements AuctionBehavior{
 			}
 		}
 		
+		System.out.println("Task from " + task.pickupCity + " and to " + task.deliveryCity);
 		System.out.println("My marginal cost " + myMarginalCost + " and estimate " + ennemyMarginalCost);
 
 		if(ennemyMarginalCost <= myMarginalCost && ennemyEstimatedBid > 0) {
@@ -165,6 +169,10 @@ public class AuctionAgent implements AuctionBehavior{
 		Long winnerMoney = availableMoney.get(lastWinner);
 		winnerMoney += lastOffers[lastWinner];
 		availableMoney.put(lastWinner, winnerMoney);
+		
+		
+		if(lastOffers[ennemyId] < minimumEnemyBid)
+			minimumEnemyBid = lastOffers[ennemyId];
 		
 		//Update ennemy error
 		if(ennemyEstimatedBid > 0) {
