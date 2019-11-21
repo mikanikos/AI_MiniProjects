@@ -43,7 +43,7 @@ public class AuctionAgent implements AuctionBehavior {
     private static final int MIN_BID = 500;
 
     private List<Task> tasksWon;
-    private Map<Integer, EnemyAgent> enemies;
+    private EnemyAgent enemy;
     private long bidTimeout;
     private long planTimeout;
     private SLSSolution currentSolution;
@@ -51,6 +51,8 @@ public class AuctionAgent implements AuctionBehavior {
     private List<Long> bidHistory;
     private int round;
     private double bidRate;
+    private double profit;
+    private double previousCost;
     private Map<PickupDelivery, Integer> expectedLoadBetweenCities;
     private Map<PickupDelivery, Double> expectedTaskProbability;
     private Map<City, Double> expectedProbabilityDeliveryIsPickup;
@@ -84,7 +86,8 @@ public class AuctionAgent implements AuctionBehavior {
         this.round = 0;
         this.bidRate = 0.0;
         this.bidHistory = new ArrayList<>();
-        this.enemies = new HashMap<>();
+        this.enemy = new EnemyAgent(this.agent.vehicles());
+        //this.enemies = new HashMap<>();
         this.expectedLoadBetweenCities = new HashMap<>();
         this.expectedTaskProbability = new HashMap<>();
         this.expectedProbabilityDeliveryIsPickup = new HashMap<>();
@@ -127,16 +130,8 @@ public class AuctionAgent implements AuctionBehavior {
             System.out.println(b);
 
 
-        for (int i = 0; i < bids.length; i++) {
-            if (i != agent.id()) {
-                if (round == 0) {
-                    enemies.putIfAbsent(i, new EnemyAgent(agent.vehicles()));
-                }
-                enemies.get(i).addBid(bids[i]);
-            } else {
-                bidHistory.add(bids[i]);
-            }
-        }
+        enemy.addBid(bids[1 - agent.id()]);
+        bidHistory.add(bids[agent.id()]);
 
         if (agent.id() == winner) {
             System.out.println("We won!!!");
@@ -145,22 +140,24 @@ public class AuctionAgent implements AuctionBehavior {
             // we won, increase request for next time
             this.bidRate += 0.1;
 
-            if (bids[winner] + 1000 < Collections.max(Arrays.asList(bids))) {
-                this.bidRate += 0.2;
-            }
+            this.profit += previous.reward - this.previousCost;
 
+//            if (bids[winner] + 1000 < bids[1 - agent.id()]) {
+//                this.bidRate += 0.2;
+//            }
 
         } else {
-            System.out.println("Winner round " + round + " : " + winner);
+            System.out.println("Enemy wins");
 
-            enemies.get(winner).getTasksWon().add(previous);
+            enemy.getTasksWon().add(previous);
             // we lost, decrease request for next time
             this.bidRate -= 0.2;
 
-            if (bids[winner] + 1000 < bids[agent.id()]) {
-                this.bidRate -= 0.2;
-            }
+            enemy.profit += previous.reward - this.previousCost;
 
+//            if (bids[winner] + 1000 < bids[agent.id()]) {
+//                this.bidRate -= 0.2;
+//            }
         }
 
         this.round++;
@@ -184,47 +181,37 @@ public class AuctionAgent implements AuctionBehavior {
             return null;
         }
 
-        // compute marginal cost for opponents
-        long planTimeout = bidTimeout;
-        double bestEnemyBid = Double.MAX_VALUE;
-        if (round != 0) {
-            planTimeout /= (enemies.values().size() + 1);
-            for (EnemyAgent e : enemies.values()) {
-                System.out.println("Computing enemy plan");
-                e.computeMarginalCost(task, planTimeout, MARGINAL_COST_INCREASE_FACTOR);
-                double bid = e.getCurrentMarginalCost();
-                if (bid < bestEnemyBid) {
-                    bestEnemyBid = bid;
-                }
-            }
-        }
+        // compute marginal cost for opponent
+        System.out.println("Computing enemy plan");
+        enemy.computeMarginalCost(task, bidTimeout / 2, 0);
+        double enemyBid = enemy.getCurrentMarginalCost();
 
         System.out.println("Computing my plan");
 
         List<Task> possibleTasks = new ArrayList<>(tasksWon);
         possibleTasks.add(task);
 
-        SLSSolution solution = SLS.Solve(this.agent.vehicles(), possibleTasks, planTimeout);
+        SLSSolution solution = SLS.Solve(this.agent.vehicles(), possibleTasks, bidTimeout / 2);
         double marginal_cost = solution.getCost(this.agent.vehicles()) - currentSolution.getCost(this.agent.vehicles());
         currentSolution = solution;
 
-//        // increase it a bit in order to make profit
-//        marginal_cost *= (1 + MARGINAL_COST_INCREASE_FACTOR - bidRate);
-
         // cost from current to pickup and to pickup to delivery city
-        long distanceSum = task.pickupCity.distanceUnitsTo(task.deliveryCity) + currentCity.distanceUnitsTo(task.pickupCity);
-        double minimalBid = Measures.unitsToKM(distanceSum * selectedVehicle.costPerKm());
+        double distanceSum = task.pickupCity.distanceTo(task.deliveryCity);
+        this.previousCost = distanceSum * selectedVehicle.costPerKm();
 
-        System.out.println("Marginal cost: " + marginal_cost);
-        if (minimalBid - marginal_cost > 1500) {
-            marginal_cost = minimalBid;
+        System.out.println("Minimal bid: " + this.previousCost);
+
+        System.out.println("Marginal cost before changes: " + marginal_cost);
+
+        if (marginal_cost < this.previousCost) {
+            marginal_cost = this.previousCost * 1.1;
         }
 
         // increase it a bit in order to make profit
         double rate = (MARGINAL_COST_INCREASE_FACTOR + bidRate);
 
         // if first rounds or still need to get first tasks, try to ask for a low price so that I can get well started
-        if (this.round + tasksWon.size() < ROUND_THRESHOLD * 2 || tasksWon.size() < this.round / 3) {
+        if (this.round + tasksWon.size() < ROUND_THRESHOLD * 2 || tasksWon.size() < this.round / 2) {
             rate -= INIT_FACTOR_DISCOUNT;
         }
 
@@ -233,45 +220,28 @@ public class AuctionAgent implements AuctionBehavior {
             rate -= 0.2;
         }
 
-        System.out.println("Best enemy bid: " + bestEnemyBid);
-        if (round > 5 && (bestEnemyBid + 1000 < marginal_cost || getEnemyWithMoreTasksWon().getTasksWon().size() > tasksWon.size() + 5)) {
-            rate -= 0.3;
+        System.out.println("Best enemy bid: " + enemyBid);
+        if (round > 5 && (enemyBid + 1000 < marginal_cost)) {
+            rate -= 0.2;
         }
 
-        if (round > 5 && bestEnemyBid - 1000 > marginal_cost) {
-            rate += 0.2;
+        if (round > 5 && enemyBid - 1000 > marginal_cost) {
+            rate += 0.1;
+        }
+
+        if (this.profit < enemy.profit) {
+            rate -= 0.3;
         }
 
         System.out.println("rate: " + rate);
 
-        if (rate <= -1) {
-            rate = 0.3;
-        }
-
-        if (rate >= 3) {
-            rate = 2;
-        }
+        rate = Math.min(Math.max(rate, 0.3), 2);
 
         marginal_cost *= (1 + rate);
 
         System.out.println("Marginal cost: " + marginal_cost);
-        System.out.println("Minimal bid: " + minimalBid);
-        return (long) Math.max(Math.max(marginal_cost, minimalBid), MIN_BID);
-    }
-
-    public EnemyAgent getEnemyWithMoreTasksWon() {
-        EnemyAgent top = null;
-        int maxTasks = Integer.MIN_VALUE;
-
-        for (EnemyAgent e : enemies.values()) {
-            if (e.getTasksWon().size() > maxTasks) {
-                maxTasks = e.getTasksWon().size();
-                top = e;
-            }
-        }
-
-        return top;
-
+        System.out.println("Minimal bid: " + this.previousCost);
+        return (long) Math.max(marginal_cost, this.previousCost);
     }
 
     @Override
@@ -279,10 +249,7 @@ public class AuctionAgent implements AuctionBehavior {
 
         System.out.println("Agent " + agent.id() + " has tasks " + tasks);
 
-        List<Task> listTask = new ArrayList<>();
-        for (Task t : tasks) {
-            listTask.add(t);
-        }
+        List<Task> listTask = new ArrayList<>(tasks);
 
         return SLS.Solve(vehicles, listTask, this.planTimeout).getPlans(vehicles);
     }

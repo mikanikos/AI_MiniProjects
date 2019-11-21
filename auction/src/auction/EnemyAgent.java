@@ -11,6 +11,7 @@ import java.util.List;
 
 public class EnemyAgent {
 
+    public double profit;
     private List<Vehicle> vehicles;
     private List<Task> tasksWon;
     private SLSSolution currentSolution;
