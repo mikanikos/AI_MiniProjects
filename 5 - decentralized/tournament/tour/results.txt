@@ -1,0 +1,11 @@
+### auction.xml ###
+      Agents       | Win - Draw - Lose  |       agent2       |       agent        |       dummy       
+      agent2       |     4 - 0 - 0      |         -          | WIN (2136 : 1010)  | WIN (13490 : 614) 
+      agent        |     2 - 0 - 2      | LOSE (-333 : 1693) |         -          | WIN (11878 : 473) 
+      dummy        |     0 - 0 - 4      |  LOSE (77 : 2344)  | LOSE (784 : 2396)  |         -         
+
+First company results
+  # wins   : 3
+  # draws  : 0
+  # losses : 3
+

@@ -98,25 +98,32 @@ public class AuctionAgent implements AuctionBehavior{
 			possibleSolutions.put(id, possibleSolution);
 			
 			double marginalCost = possibleSolution.getCost() - currentSolution.getCost();
-			
-			double maxProbInterest = 0.0;
-			for(Task t : currentSolution.getTasks()) {
-				double p = distribution.probability(t.deliveryCity, task.pickupCity);
-				if(p > maxProbInterest)
-					maxProbInterest = p;
+
+			if (marginalCost <= 0) {
+				double distanceSum = task.pickupCity.distanceTo(task.deliveryCity);
+				marginalCost = (distanceSum * highestCostPerKm);
 			}
 
-			if(maxProbInterest > TASK_INTEREST_PROBA_THRESHOLD) {
-				marginalCost *= TASK_INTEREST_REDUCE_FACTOR;
+			if(id != ennemyId) {
+				double maxProbInterest = 0.0;
+				for (Task t : currentSolution.getTasks()) {
+					double p = distribution.probability(t.deliveryCity, task.pickupCity);
+					if (p > maxProbInterest)
+						maxProbInterest = p;
+				}
+
+				if (maxProbInterest > TASK_INTEREST_PROBA_THRESHOLD) {
+					marginalCost *= TASK_INTEREST_REDUCE_FACTOR;
+				}
 			}
-			
+
 			if(id == ennemyId) {
 				ennemyMarginalCost = marginalCost;
 				ennemyMarginalCost *= meanEnnemyPredictionError;
 
 				if(ennemyMarginalCost < minimumEnemyBid)
 					ennemyMarginalCost = minimumEnemyBid;
-				
+
 				if(ennemyMarginalCost > 0) {
 					ennemyEstimatedBid = marginalCost;
 				}else {
@@ -130,7 +137,7 @@ public class AuctionAgent implements AuctionBehavior{
 		System.out.println("Task from " + task.pickupCity + " and to " + task.deliveryCity);
 		System.out.println("My marginal cost " + myMarginalCost + " and estimate " + ennemyMarginalCost);
 
-		if(ennemyMarginalCost <= myMarginalCost && ennemyEstimatedBid > 0) {
+		if (ennemyMarginalCost <= myMarginalCost) {
 			double marginalCostDif = myMarginalCost - (ennemyMarginalCost  * SAFETY_BID_FROM_ENNEMY);
 			
 			double moneyDif = (availableMoney.get(agent.id()) - currentSolutions.get(agent.id()).getCost())
@@ -139,23 +146,29 @@ public class AuctionAgent implements AuctionBehavior{
 			if(moneyDif > marginalCostDif) {
 				myMarginalCost -= marginalCostDif;
 			}
-		}else { //Try to get has much money has possible
+
+			myMarginalCost = Math.min(myMarginalCost * 0.85, myMarginalCost);
+
+		} else { //Try to get has much money has possible
 			double newMarginalCost;
 			
 			if(currentRound < FIRST_ROUNDS_LIMIT) {
-				newMarginalCost = ennemyMarginalCost * SAFETY_BID_FROM_ENNEMY_FIRST_ROUNDS;
+				newMarginalCost = myMarginalCost * (1  + 0.1);
 			}else {
-				newMarginalCost = ennemyMarginalCost * SAFETY_BID_FROM_ENNEMY;
+				newMarginalCost = myMarginalCost * (1 + 0.2);
 			}
-			
+
+			newMarginalCost = Math.min(ennemyMarginalCost * 0.9, newMarginalCost);
+
 			if(newMarginalCost > myMarginalCost)
 				myMarginalCost = newMarginalCost;
 		}
 
 		long bid = (long)Math.ceil(myMarginalCost);
 
-		if(bid <= 0)
-			bid = 1;
+		if(bid <= 0) {
+			bid = minimumEnemyBid;
+		}
 		
 		return bid;
 	}

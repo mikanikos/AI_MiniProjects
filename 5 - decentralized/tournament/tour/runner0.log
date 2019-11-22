@@ -1,0 +1,1194 @@
+12:48:23.603 FINE | Run command: java -Xmx1024m -classpath ../logist/logist.jar logist.LogistPlatform -o tournament/tour/auction-agent2-dummy.xml -a tournament/tour/agents.xml ./config/auction.xml agent2 dummy
+12:48:23.707 CONFIG | Reading ./config/auction.xml
+12:48:23.791 CONFIG | Reading config/settings_auction.xml
+12:48:23.872 CONFIG | Reading config/topology/england.xml
+12:48:23.896 CONFIG | Reading tournament/tour/agents.xml
+12:48:33.039 CONFIG | Task from Cardiff and to Sheffield
+12:48:33.040 CONFIG | My marginal cost 2191.0 and estimate 2191.0
+12:48:33.041 CONFIG | Winner is 0 my bid 2191 ennemy bid 3415
+12:48:42.141 CONFIG | Task from Manchester and to Norwich
+12:48:42.142 CONFIG | My marginal cost 1905.6000000000001 and estimate 4158.475581926061
+12:48:42.142 CONFIG | Winner is 0 my bid 3119 ennemy bid 3962
+12:48:51.242 CONFIG | Task from Cardiff and to Manchester
+12:48:51.242 CONFIG | My marginal cost 560.0 and estimate 3370.088676194764
+12:48:51.243 CONFIG | Winner is 0 my bid 2528 ennemy bid 3575
+12:49:00.343 CONFIG | Task from Sheffield and to Portsmouth
+12:49:00.343 CONFIG | My marginal cost 598.4 and estimate 3282.348900873254
+12:49:00.344 CONFIG | Winner is 0 my bid 2462 ennemy bid 3800
+12:49:09.444 CONFIG | Task from Liverpool and to Norwich
+12:49:09.444 CONFIG | My marginal cost 0.0 and estimate 4305.856268045119
+12:49:09.445 CONFIG | Winner is 0 my bid 3230 ennemy bid 4302
+12:49:18.545 CONFIG | Task from Norwich and to London
+12:49:18.546 CONFIG | My marginal cost 160.8 and estimate 1855.6400924293516
+12:49:18.546 CONFIG | Winner is 0 my bid 1671 ennemy bid 2658
+12:49:27.646 CONFIG | Task from Cardiff and to London
+12:49:27.646 CONFIG | My marginal cost 0.0 and estimate 4110.42557063664
+12:49:27.647 CONFIG | Winner is 0 my bid 3700 ennemy bid 4009
+12:49:36.747 CONFIG | Task from London and to Manchester
+12:49:36.747 CONFIG | My marginal cost 851.6 and estimate 1928.075431920381
+12:49:36.748 CONFIG | Winner is 0 my bid 1736 ennemy bid 2467
+12:49:45.848 CONFIG | Task from Plymouth and to Birmingham
+12:49:45.848 CONFIG | My marginal cost 1659.2 and estimate 5929.817002496605
+12:49:45.848 CONFIG | Winner is 1 my bid 5337 ennemy bid 2287
+12:49:54.948 CONFIG | Task from Portsmouth and to Plymouth
+12:49:54.948 CONFIG | My marginal cost 680.0 and estimate 3032.704060348081
+12:49:54.949 CONFIG | Winner is 1 my bid 2730 ennemy bid 1955
+12:50:04.568 CONFIG | Wrote tournament/tour/auction-agent2-dummy.xml
+12:50:04.620 INFO | LogistPlatform finished successfully!
+12:50:04.626 FINE | Run command: java -Xmx1024m -classpath ../logist/logist.jar logist.LogistPlatform -o tournament/tour/auction-agent2-agent.xml -a tournament/tour/agents.xml ./config/auction.xml agent2 agent
+12:50:04.732 CONFIG | Reading ./config/auction.xml
+12:50:04.839 CONFIG | Reading config/settings_auction.xml
+12:50:04.943 CONFIG | Reading config/topology/england.xml
+12:50:04.976 CONFIG | Reading tournament/tour/agents.xml
+12:50:05.001 CONFIG | Reading config/settings_auction.xml
+12:50:14.137 CONFIG | Task from Cardiff and to Sheffield
+12:50:14.138 CONFIG | My marginal cost 2191.0 and estimate 2191.0
+12:50:14.138 CONFIG | Asking price for task: 0
+12:50:14.138 CONFIG | Computing enemy plan
+12:50:18.689 CONFIG | Vehicle 3
+12:50:18.689 CONFIG | 
+12:50:18.689 CONFIG | Vehicle 4
+12:50:18.689 CONFIG | 0 0 
+12:50:18.689 CONFIG | 3743 807
+12:50:18.689 CONFIG | Best cost: 2766.0
+12:50:18.690 CONFIG | Computing my plan
+12:50:23.239 CONFIG | Vehicle 3
+12:50:23.239 CONFIG | 
+12:50:23.239 CONFIG | Vehicle 4
+12:50:23.239 CONFIG | 0 0 
+12:50:23.239 CONFIG | 3519 1031
+12:50:23.239 CONFIG | Best cost: 2766.0
+12:50:23.239 CONFIG | Minimal bid: 1026.0
+12:50:23.239 CONFIG | Marginal cost before changes: 2766.0
+12:50:23.239 CONFIG | Probability: 0.1001106276073433
+12:50:23.239 CONFIG | Best enemy bid: 2766.0
+12:50:23.239 CONFIG | rate: -0.1
+12:50:23.239 CONFIG | Marginal cost: 3595.8
+12:50:23.240 CONFIG | Minimal bid: 1026.0
+12:50:23.240 CONFIG | Winner is 0 my bid 2191 ennemy bid 3595
+12:50:32.340 CONFIG | Task from Manchester and to Norwich
+12:50:32.340 CONFIG | My marginal cost 1905.6000000000001 and estimate 4377.663167503423
+12:50:32.340 CONFIG | 2191
+12:50:32.341 CONFIG | 3595
+12:50:32.341 CONFIG | Enemy wins
+12:50:32.341 CONFIG | Asking price for task: 1
+12:50:32.341 CONFIG | Computing enemy plan
+12:50:36.891 CONFIG | Vehicle 3
+12:50:36.891 CONFIG | 0 0 1 1 
+12:50:36.891 CONFIG | Vehicle 4
+12:50:36.891 CONFIG | 
+12:50:36.891 CONFIG | 3886 664
+12:50:36.891 CONFIG | Best cost: 5797.0
+12:50:36.891 CONFIG | Computing my plan
+12:50:41.441 CONFIG | Vehicle 3
+12:50:41.441 CONFIG | 
+12:50:41.441 CONFIG | Vehicle 4
+12:50:41.441 CONFIG | 1 1 
+12:50:41.441 CONFIG | 3583 967
+12:50:41.441 CONFIG | Best cost: 3279.0
+12:50:41.441 CONFIG | Minimal bid: 1639.5
+12:50:41.441 CONFIG | Marginal cost before changes: 513.0
+12:50:41.441 CONFIG | Probability: 0.08262615763337533
+12:50:41.441 CONFIG | Best enemy bid: 5797.0
+12:50:41.441 CONFIG | rate: -0.4
+12:50:41.441 CONFIG | Marginal cost: 2344.485
+12:50:41.442 CONFIG | Minimal bid: 1639.5
+12:50:41.442 CONFIG | Winner is 1 my bid 3284 ennemy bid 2344
+12:50:50.542 CONFIG | Task from Cardiff and to Manchester
+12:50:50.542 CONFIG | My marginal cost 742.5 and estimate 1493.9828554458509
+12:50:50.542 CONFIG | 3284
+12:50:50.542 CONFIG | 2344
+12:50:50.542 CONFIG | We won!!!
+12:50:50.542 CONFIG | Asking price for task: 2
+12:50:50.542 CONFIG | Computing enemy plan
+12:50:55.092 CONFIG | Vehicle 3
+12:50:55.092 CONFIG | 0 2 0 2 
+12:50:55.092 CONFIG | Vehicle 4
+12:50:55.092 CONFIG | 
+12:50:55.092 CONFIG | 3908 642
+12:50:55.092 CONFIG | Best cost: 4157.5
+12:50:55.092 CONFIG | Computing my plan
+12:50:59.642 CONFIG | Vehicle 3
+12:50:59.642 CONFIG | 
+12:50:59.642 CONFIG | Vehicle 4
+12:50:59.642 CONFIG | 2 1 2 1 
+12:50:59.642 CONFIG | 3829 721
+12:50:59.642 CONFIG | Best cost: 4429.0
+12:50:59.642 CONFIG | Minimal bid: 1049.5
+12:50:59.642 CONFIG | Marginal cost before changes: 1150.0
+12:50:59.642 CONFIG | Probability: 0.09457233912911361
+12:50:59.642 CONFIG | Best enemy bid: 4157.5
+12:50:59.642 CONFIG | rate: -0.5
+12:50:59.642 CONFIG | Marginal cost: 1495.0
+12:50:59.642 CONFIG | Minimal bid: 1049.5
+12:50:59.643 CONFIG | Winner is 0 my bid 1121 ennemy bid 1495
+12:51:08.743 CONFIG | Task from Sheffield and to Portsmouth
+12:51:08.744 CONFIG | My marginal cost 1150.8 and estimate 1462.822706673768
+12:51:08.744 CONFIG | 1121
+12:51:08.744 CONFIG | 1495
+12:51:08.744 CONFIG | Enemy wins
+12:51:08.744 CONFIG | Asking price for task: 3
+12:51:08.744 CONFIG | Computing enemy plan
+12:51:13.294 CONFIG | Vehicle 3
+12:51:13.294 CONFIG | 0 2 2 0 3 3 
+12:51:13.294 CONFIG | Vehicle 4
+12:51:13.294 CONFIG | 
+12:51:13.294 CONFIG | 3890 660
+12:51:13.294 CONFIG | Best cost: 5596.0
+12:51:13.294 CONFIG | Computing my plan
+12:51:17.844 CONFIG | Vehicle 3
+12:51:17.844 CONFIG | 1 3 3 1 
+12:51:17.844 CONFIG | Vehicle 4
+12:51:17.844 CONFIG | 
+12:51:17.844 CONFIG | 3857 693
+12:51:17.844 CONFIG | Best cost: 5395.0
+12:51:17.844 CONFIG | Minimal bid: 1415.0
+12:51:17.844 CONFIG | Marginal cost before changes: 966.0
+12:51:17.844 CONFIG | Probability: 0.06782111603850108
+12:51:17.844 CONFIG | Best enemy bid: 5596.0
+12:51:17.844 CONFIG | rate: -0.5
+12:51:17.844 CONFIG | Marginal cost: 2023.4500000000003
+12:51:17.845 CONFIG | Minimal bid: 1415.0
+12:51:17.845 CONFIG | Winner is 0 my bid 1151 ennemy bid 2023
+12:51:26.945 CONFIG | Task from Liverpool and to Norwich
+12:51:26.945 CONFIG | My marginal cost 759.2 and estimate 500.0
+12:51:26.946 CONFIG | 1151
+12:51:26.946 CONFIG | 2023
+12:51:26.946 CONFIG | Enemy wins
+12:51:26.946 CONFIG | Asking price for task: 4
+12:51:26.946 CONFIG | Computing enemy plan
+12:51:31.496 CONFIG | Vehicle 3
+12:51:31.496 CONFIG | 0 2 0 3 4 2 3 4 
+12:51:31.496 CONFIG | Vehicle 4
+12:51:31.496 CONFIG | 
+12:51:31.496 CONFIG | 3799 751
+12:51:31.496 CONFIG | Best cost: 6545.0
+12:51:31.496 CONFIG | Computing my plan
+12:51:36.046 CONFIG | Vehicle 3
+12:51:36.046 CONFIG | 1 4 1 4 
+12:51:36.046 CONFIG | Vehicle 4
+12:51:36.046 CONFIG | 
+12:51:36.046 CONFIG | 3842 708
+12:51:36.046 CONFIG | Best cost: 4275.0
+12:51:36.046 CONFIG | Minimal bid: 1813.0
+12:51:36.046 CONFIG | Marginal cost before changes: -1120.0
+12:51:36.046 CONFIG | Probability: 0.08262615763337533
+12:51:36.046 CONFIG | Best enemy bid: 6545.0
+12:51:36.046 CONFIG | rate: -0.7
+12:51:36.047 CONFIG | Marginal cost: 2592.59
+12:51:36.047 CONFIG | Minimal bid: 1813.0
+12:51:36.047 CONFIG | Winner is 0 my bid 760 ennemy bid 2592
+12:51:45.146 CONFIG | Task from Norwich and to London
+12:51:45.146 CONFIG | My marginal cost 160.8 and estimate 793.8402603385551
+12:51:45.147 CONFIG | 760
+12:51:45.147 CONFIG | 2592
+12:51:45.147 CONFIG | Enemy wins
+12:51:45.147 CONFIG | Asking price for task: 5
+12:51:45.147 CONFIG | Computing enemy plan
+12:51:49.697 CONFIG | Vehicle 3
+12:51:49.697 CONFIG | 0 2 0 3 4 2 5 4 5 3 
+12:51:49.697 CONFIG | Vehicle 4
+12:51:49.697 CONFIG | 
+12:51:49.697 CONFIG | 3815 735
+12:51:49.698 CONFIG | Best cost: 6746.0
+12:51:49.698 CONFIG | Computing my plan
+12:51:54.247 CONFIG | Vehicle 3
+12:51:54.248 CONFIG | 
+12:51:54.248 CONFIG | Vehicle 4
+12:51:54.248 CONFIG | 5 1 5 1 
+12:51:54.248 CONFIG | 3863 687
+12:51:54.248 CONFIG | Best cost: 3279.0
+12:51:54.248 CONFIG | Minimal bid: 575.0
+12:51:54.248 CONFIG | Marginal cost before changes: -996.0
+12:51:54.248 CONFIG | Probability: 0.08261425298962384
+12:51:54.248 CONFIG | Best enemy bid: 6746.0
+12:51:54.248 CONFIG | rate: -0.6
+12:51:54.248 CONFIG | Marginal cost: 822.25
+12:51:54.248 CONFIG | Minimal bid: 575.0
+12:51:54.248 CONFIG | Winner is 0 my bid 715 ennemy bid 822
+12:52:03.348 CONFIG | Task from Cardiff and to London
+12:52:03.348 CONFIG | My marginal cost 0.0 and estimate 1598.944416541688
+12:52:03.348 CONFIG | 715
+12:52:03.348 CONFIG | 822
+12:52:03.348 CONFIG | Enemy wins
+12:52:03.349 CONFIG | Asking price for task: 6
+12:52:03.349 CONFIG | Computing enemy plan
+12:52:07.898 CONFIG | Vehicle 3
+12:52:07.898 CONFIG | 0 6 2 2 4 0 3 4 5 5 6 3 
+12:52:07.898 CONFIG | Vehicle 4
+12:52:07.898 CONFIG | 
+12:52:07.898 CONFIG | 3696 854
+12:52:07.898 CONFIG | Best cost: 6746.0
+12:52:07.898 CONFIG | Computing my plan
+12:52:12.448 CONFIG | Vehicle 3
+12:52:12.448 CONFIG | 1 6 6 1 
+12:52:12.448 CONFIG | Vehicle 4
+12:52:12.448 CONFIG | 
+12:52:12.448 CONFIG | 3787 763
+12:52:12.448 CONFIG | Best cost: 5078.0
+12:52:12.448 CONFIG | Minimal bid: 1165.0
+12:52:12.448 CONFIG | Marginal cost before changes: 1799.0
+12:52:12.448 CONFIG | Probability: 0.08261425298962384
+12:52:12.448 CONFIG | Best enemy bid: 6746.0
+12:52:12.448 CONFIG | rate: -0.7
+12:52:12.448 CONFIG | Marginal cost: 2338.7000000000003
+12:52:12.448 CONFIG | Minimal bid: 1165.0
+12:52:12.448 CONFIG | Winner is 0 my bid 1440 ennemy bid 2338
+12:52:21.548 CONFIG | Task from London and to Manchester
+12:52:21.548 CONFIG | My marginal cost 0.0 and estimate 500.0
+12:52:21.548 CONFIG | 1440
+12:52:21.548 CONFIG | 2338
+12:52:21.548 CONFIG | Enemy wins
+12:52:21.548 CONFIG | Asking price for task: 7
+12:52:21.548 CONFIG | Computing enemy plan
+12:52:26.098 CONFIG | Vehicle 3
+12:52:26.098 CONFIG | 0 6 2 2 4 0 3 4 5 5 3 6 7 7 
+12:52:26.098 CONFIG | Vehicle 4
+12:52:26.098 CONFIG | 
+12:52:26.098 CONFIG | 3704 846
+12:52:26.098 CONFIG | Best cost: 8184.5
+12:52:26.098 CONFIG | Computing my plan
+12:52:30.648 CONFIG | Vehicle 3
+12:52:30.648 CONFIG | 
+12:52:30.648 CONFIG | Vehicle 4
+12:52:30.648 CONFIG | 7 7 1 1 
+12:52:30.649 CONFIG | 3917 633
+12:52:30.649 CONFIG | Best cost: 3279.0
+12:52:30.649 CONFIG | Minimal bid: 1064.5
+12:52:30.649 CONFIG | Marginal cost before changes: -1799.0
+12:52:30.649 CONFIG | Probability: 0.09457233912911361
+12:52:30.649 CONFIG | Best enemy bid: 8184.5
+12:52:30.649 CONFIG | rate: -1.0999999999999999
+12:52:30.649 CONFIG | Marginal cost: 1522.2350000000001
+12:52:30.649 CONFIG | Minimal bid: 1064.5
+12:52:30.649 CONFIG | Winner is 0 my bid 450 ennemy bid 1522
+12:52:39.749 CONFIG | Task from Plymouth and to Birmingham
+12:52:39.749 CONFIG | My marginal cost 1958.4 and estimate 2918.867893728355
+12:52:39.749 CONFIG | 450
+12:52:39.749 CONFIG | 1522
+12:52:39.749 CONFIG | Enemy wins
+12:52:39.749 CONFIG | Asking price for task: 8
+12:52:39.749 CONFIG | Computing enemy plan
+12:52:44.299 CONFIG | Vehicle 3
+12:52:44.299 CONFIG | 0 6 2 2 4 0 3 4 5 8 3 6 7 5 8 7 
+12:52:44.299 CONFIG | Vehicle 4
+12:52:44.299 CONFIG | 
+12:52:44.299 CONFIG | 3660 890
+12:52:44.299 CONFIG | Best cost: 9884.5
+12:52:44.299 CONFIG | Computing my plan
+12:52:48.849 CONFIG | Vehicle 3
+12:52:48.849 CONFIG | 8 8 1 1 
+12:52:48.849 CONFIG | Vehicle 4
+12:52:48.849 CONFIG | 
+12:52:48.849 CONFIG | 3899 651
+12:52:48.849 CONFIG | Best cost: 3928.0
+12:52:48.849 CONFIG | Minimal bid: 1814.0
+12:52:48.849 CONFIG | Marginal cost before changes: 649.0
+12:52:48.849 CONFIG | Probability: 0.08292047730494015
+12:52:48.849 CONFIG | Best enemy bid: 9884.5
+12:52:48.849 CONFIG | rate: -1.0999999999999999
+12:52:48.849 CONFIG | Marginal cost: 2594.02
+12:52:48.849 CONFIG | Minimal bid: 1814.0
+12:52:48.849 CONFIG | Winner is 1 my bid 2627 ennemy bid 2594
+12:52:57.949 CONFIG | Task from Portsmouth and to Plymouth
+12:52:57.949 CONFIG | My marginal cost 680.0 and estimate 500.0
+12:52:57.949 CONFIG | 2627
+12:52:57.949 CONFIG | 2594
+12:52:57.949 CONFIG | We won!!!
+12:52:57.949 CONFIG | Asking price for task: 9
+12:52:57.949 CONFIG | Computing enemy plan
+12:53:02.499 CONFIG | Vehicle 3
+12:53:02.499 CONFIG | 7 2 0 6 7 2 4 0 3 4 5 6 5 3 9 9 
+12:53:02.499 CONFIG | Vehicle 4
+12:53:02.499 CONFIG | 
+12:53:02.499 CONFIG | 3696 854
+12:53:02.499 CONFIG | Best cost: 7596.0
+12:53:02.499 CONFIG | Computing my plan
+12:53:07.049 CONFIG | Vehicle 3
+12:53:07.049 CONFIG | 9 8 9 8 1 1 
+12:53:07.049 CONFIG | Vehicle 4
+12:53:07.049 CONFIG | 
+12:53:07.049 CONFIG | 3874 676
+12:53:07.049 CONFIG | Best cost: 5628.0
+12:53:07.049 CONFIG | Minimal bid: 850.0
+12:53:07.049 CONFIG | Marginal cost before changes: 1700.0
+12:53:07.049 CONFIG | Probability: 0.09979336705862668
+12:53:07.049 CONFIG | Best enemy bid: 7596.0
+12:53:07.049 CONFIG | rate: -1.1999999999999997
+12:53:07.049 CONFIG | Marginal cost: 2210.0
+12:53:07.049 CONFIG | Minimal bid: 850.0
+12:53:07.050 CONFIG | Winner is 0 my bid 680 ennemy bid 2210
+12:53:16.656 CONFIG | 680
+12:53:16.657 CONFIG | 2210
+12:53:16.657 CONFIG | Enemy wins
+12:53:16.657 CONFIG | Agent 1 has tasks [(Task 1, 3 kg, 2344 CHF, Manchester -> Norwich), (Task 8, 3 kg, 2594 CHF, Plymouth -> Birmingham)]
+12:53:26.257 CONFIG | Vehicle 3
+12:53:26.257 CONFIG | 8 1 8 1 
+12:53:26.257 CONFIG | Vehicle 4
+12:53:26.257 CONFIG | 
+12:53:26.257 CONFIG | 8112 1488
+12:53:26.257 CONFIG | Best cost: 3928.0
+12:53:26.260 CONFIG | Wrote tournament/tour/auction-agent2-agent.xml
+12:53:26.308 INFO | LogistPlatform finished successfully!
+12:53:26.310 FINE | Run command: java -Xmx1024m -classpath ../logist/logist.jar logist.LogistPlatform -o tournament/tour/auction-dummy-agent2.xml -a tournament/tour/agents.xml ./config/auction.xml dummy agent2
+12:53:26.407 CONFIG | Reading ./config/auction.xml
+12:53:26.485 CONFIG | Reading config/settings_auction.xml
+12:53:26.563 CONFIG | Reading config/topology/england.xml
+12:53:26.585 CONFIG | Reading tournament/tour/agents.xml
+12:53:35.731 CONFIG | Task from Cardiff and to Sheffield
+12:53:35.733 CONFIG | My marginal cost 2766.0 and estimate 2766.0
+12:53:35.734 CONFIG | Winner is 0 my bid 2766 ennemy bid 2751
+12:53:44.834 CONFIG | Task from Manchester and to Norwich
+12:53:44.834 CONFIG | My marginal cost 3279.0 and estimate 1895.2659436008678
+12:53:44.835 CONFIG | Winner is 0 my bid 3279 ennemy bid 2411
+12:53:53.935 CONFIG | Task from Cardiff and to Manchester
+12:53:53.935 CONFIG | My marginal cost 2789.5 and estimate 733.3035782422761
+12:53:53.936 CONFIG | Winner is 1 my bid 2790 ennemy bid 2967
+12:54:03.036 CONFIG | Task from Sheffield and to Portsmouth
+12:54:03.036 CONFIG | My marginal cost 1726.0 and estimate 1578.4670243520181
+12:54:03.037 CONFIG | Winner is 1 my bid 1726 ennemy bid 3281
+12:54:12.137 CONFIG | Task from Liverpool and to Norwich
+12:54:12.137 CONFIG | My marginal cost 759.2 and estimate 797.5603335927309
+12:54:12.138 CONFIG | Winner is 1 my bid 760 ennemy bid 4059
+12:54:21.238 CONFIG | Task from Norwich and to London
+12:54:21.238 CONFIG | My marginal cost 0.0 and estimate 1504.1815844645648
+12:54:21.239 CONFIG | Winner is 0 my bid 1354 ennemy bid 623
+12:54:30.339 CONFIG | Task from Cardiff and to London
+12:54:30.339 CONFIG | My marginal cost 0.0 and estimate 500.0
+12:54:30.339 CONFIG | Winner is 1 my bid 450 ennemy bid 2599
+12:54:39.439 CONFIG | Task from London and to Manchester
+12:54:39.439 CONFIG | My marginal cost 0.0 and estimate 1116.5823917458308
+12:54:39.439 CONFIG | Winner is 1 my bid 1005 ennemy bid 1431
+12:54:48.539 CONFIG | Task from Plymouth and to Birmingham
+12:54:48.540 CONFIG | My marginal cost 1451.2 and estimate 3366.1037528408333
+12:54:48.541 CONFIG | Winner is 1 my bid 3030 ennemy bid 4106
+12:54:57.641 CONFIG | Task from Portsmouth and to Plymouth
+12:54:57.641 CONFIG | My marginal cost 840.8000000000001 and estimate 1492.2726623099313
+12:54:57.649 CONFIG | Winner is 1 my bid 1344 ennemy bid 1742
+12:55:07.258 CONFIG | Wrote tournament/tour/auction-dummy-agent2.xml
+12:55:07.305 INFO | LogistPlatform finished successfully!
+12:55:07.307 FINE | Run command: java -Xmx1024m -classpath ../logist/logist.jar logist.LogistPlatform -o tournament/tour/auction-dummy-agent.xml -a tournament/tour/agents.xml ./config/auction.xml dummy agent
+12:55:07.400 CONFIG | Reading ./config/auction.xml
+12:55:07.469 CONFIG | Reading config/settings_auction.xml
+12:55:07.546 CONFIG | Reading config/topology/england.xml
+12:55:07.574 CONFIG | Reading tournament/tour/agents.xml
+12:55:07.597 CONFIG | Reading config/settings_auction.xml
+12:55:07.624 CONFIG | Asking price for task: 0
+12:55:07.624 CONFIG | Computing enemy plan
+12:55:12.176 CONFIG | Vehicle 3
+12:55:12.176 CONFIG | 
+12:55:12.176 CONFIG | Vehicle 4
+12:55:12.176 CONFIG | 0 0 
+12:55:12.176 CONFIG | 3691 859
+12:55:12.177 CONFIG | Best cost: 2766.0
+12:55:12.177 CONFIG | Computing my plan
+12:55:16.727 CONFIG | Vehicle 3
+12:55:16.727 CONFIG | 
+12:55:16.727 CONFIG | Vehicle 4
+12:55:16.727 CONFIG | 0 0 
+12:55:16.727 CONFIG | 3602 948
+12:55:16.727 CONFIG | Best cost: 2766.0
+12:55:16.727 CONFIG | Minimal bid: 1026.0
+12:55:16.727 CONFIG | Marginal cost before changes: 2766.0
+12:55:16.727 CONFIG | Probability: 0.1001106276073433
+12:55:16.727 CONFIG | Best enemy bid: 2766.0
+12:55:16.727 CONFIG | rate: -0.1
+12:55:16.728 CONFIG | Marginal cost: 3595.8
+12:55:16.728 CONFIG | Minimal bid: 1026.0
+12:55:16.729 CONFIG | 2751
+12:55:16.730 CONFIG | 3595
+12:55:16.730 CONFIG | Enemy wins
+12:55:16.730 CONFIG | Asking price for task: 1
+12:55:16.730 CONFIG | Computing enemy plan
+12:55:21.281 CONFIG | Vehicle 3
+12:55:21.281 CONFIG | 0 0 1 1 
+12:55:21.281 CONFIG | Vehicle 4
+12:55:21.281 CONFIG | 
+12:55:21.281 CONFIG | 3898 653
+12:55:21.281 CONFIG | Best cost: 5797.0
+12:55:21.281 CONFIG | Computing my plan
+12:55:25.831 CONFIG | Vehicle 3
+12:55:25.831 CONFIG | 
+12:55:25.831 CONFIG | Vehicle 4
+12:55:25.831 CONFIG | 1 1 
+12:55:25.831 CONFIG | 3618 932
+12:55:25.831 CONFIG | Best cost: 3279.0
+12:55:25.831 CONFIG | Minimal bid: 1639.5
+12:55:25.831 CONFIG | Marginal cost before changes: 513.0
+12:55:25.831 CONFIG | Probability: 0.08262615763337533
+12:55:25.831 CONFIG | Best enemy bid: 5797.0
+12:55:25.831 CONFIG | rate: -0.4
+12:55:25.831 CONFIG | Marginal cost: 2344.485
+12:55:25.831 CONFIG | Minimal bid: 1639.5
+12:55:25.832 CONFIG | 2411
+12:55:25.833 CONFIG | 2344
+12:55:25.833 CONFIG | We won!!!
+12:55:25.833 CONFIG | Asking price for task: 2
+12:55:25.833 CONFIG | Computing enemy plan
+12:55:30.383 CONFIG | Vehicle 3
+12:55:30.383 CONFIG | 0 2 0 2 
+12:55:30.383 CONFIG | Vehicle 4
+12:55:30.383 CONFIG | 
+12:55:30.383 CONFIG | 3849 701
+12:55:30.383 CONFIG | Best cost: 4157.5
+12:55:30.383 CONFIG | Computing my plan
+12:55:34.933 CONFIG | Vehicle 3
+12:55:34.933 CONFIG | 2 2 1 1 
+12:55:34.933 CONFIG | Vehicle 4
+12:55:34.933 CONFIG | 
+12:55:34.933 CONFIG | 3790 760
+12:55:34.933 CONFIG | Best cost: 5078.0
+12:55:34.933 CONFIG | Minimal bid: 1049.5
+12:55:34.933 CONFIG | Marginal cost before changes: 1799.0
+12:55:34.933 CONFIG | Probability: 0.09457233912911361
+12:55:34.933 CONFIG | Best enemy bid: 4157.5
+12:55:34.933 CONFIG | rate: -0.5
+12:55:34.933 CONFIG | Marginal cost: 2338.7000000000003
+12:55:34.933 CONFIG | Minimal bid: 1049.5
+12:55:34.934 CONFIG | 2208
+12:55:34.934 CONFIG | 2338
+12:55:34.935 CONFIG | Enemy wins
+12:55:34.935 CONFIG | Asking price for task: 3
+12:55:34.935 CONFIG | Computing enemy plan
+12:55:39.485 CONFIG | Vehicle 3
+12:55:39.485 CONFIG | 0 2 2 0 3 3 
+12:55:39.485 CONFIG | Vehicle 4
+12:55:39.485 CONFIG | 
+12:55:39.485 CONFIG | 3874 676
+12:55:39.485 CONFIG | Best cost: 5596.0
+12:55:39.485 CONFIG | Computing my plan
+12:55:44.035 CONFIG | Vehicle 3
+12:55:44.035 CONFIG | 1 3 3 1 
+12:55:44.035 CONFIG | Vehicle 4
+12:55:44.035 CONFIG | 
+12:55:44.035 CONFIG | 3789 761
+12:55:44.035 CONFIG | Best cost: 5395.0
+12:55:44.035 CONFIG | Minimal bid: 1415.0
+12:55:44.035 CONFIG | Marginal cost before changes: 317.0
+12:55:44.035 CONFIG | Probability: 0.06782111603850108
+12:55:44.035 CONFIG | Best enemy bid: 5596.0
+12:55:44.035 CONFIG | rate: -0.5
+12:55:44.035 CONFIG | Marginal cost: 2023.4500000000003
+12:55:44.035 CONFIG | Minimal bid: 1415.0
+12:55:44.036 CONFIG | 2336
+12:55:44.036 CONFIG | 2023
+12:55:44.036 CONFIG | We won!!!
+12:55:44.036 CONFIG | Asking price for task: 4
+12:55:44.036 CONFIG | Computing enemy plan
+12:55:48.586 CONFIG | Vehicle 3
+12:55:48.586 CONFIG | 0 2 0 4 2 4 
+12:55:48.586 CONFIG | Vehicle 4
+12:55:48.586 CONFIG | 
+12:55:48.586 CONFIG | 3840 710
+12:55:48.586 CONFIG | Best cost: 5797.0
+12:55:48.586 CONFIG | Computing my plan
+12:55:53.136 CONFIG | Vehicle 3
+12:55:53.136 CONFIG | 1 4 3 3 1 4 
+12:55:53.136 CONFIG | Vehicle 4
+12:55:53.136 CONFIG | 
+12:55:53.136 CONFIG | 3702 848
+12:55:53.136 CONFIG | Best cost: 5395.0
+12:55:53.136 CONFIG | Minimal bid: 1813.0
+12:55:53.136 CONFIG | Marginal cost before changes: 0.0
+12:55:53.136 CONFIG | Probability: 0.08262615763337533
+12:55:53.136 CONFIG | Best enemy bid: 5797.0
+12:55:53.136 CONFIG | rate: -0.30000000000000004
+12:55:53.136 CONFIG | Marginal cost: 2592.59
+12:55:53.136 CONFIG | Minimal bid: 1813.0
+12:55:53.137 CONFIG | 2224
+12:55:53.137 CONFIG | 2592
+12:55:53.137 CONFIG | Enemy wins
+12:55:53.137 CONFIG | Asking price for task: 5
+12:55:53.137 CONFIG | Computing enemy plan
+12:55:57.687 CONFIG | Vehicle 3
+12:55:57.687 CONFIG | 0 2 0 4 2 4 5 5 
+12:55:57.687 CONFIG | Vehicle 4
+12:55:57.687 CONFIG | 
+12:55:57.687 CONFIG | 3895 655
+12:55:57.687 CONFIG | Best cost: 6372.0
+12:55:57.687 CONFIG | Computing my plan
+12:56:02.237 CONFIG | Vehicle 3
+12:56:02.237 CONFIG | 3 1 5 1 5 3 
+12:56:02.237 CONFIG | Vehicle 4
+12:56:02.237 CONFIG | 
+12:56:02.237 CONFIG | 3843 707
+12:56:02.237 CONFIG | Best cost: 5596.0
+12:56:02.237 CONFIG | Minimal bid: 575.0
+12:56:02.237 CONFIG | Marginal cost before changes: 201.0
+12:56:02.237 CONFIG | Probability: 0.08261425298962384
+12:56:02.237 CONFIG | Best enemy bid: 6372.0
+12:56:02.237 CONFIG | rate: -0.5
+12:56:02.237 CONFIG | Marginal cost: 822.25
+12:56:02.237 CONFIG | Minimal bid: 575.0
+12:56:02.238 CONFIG | 623
+12:56:02.238 CONFIG | 822
+12:56:02.238 CONFIG | Enemy wins
+12:56:02.238 CONFIG | Asking price for task: 6
+12:56:02.238 CONFIG | Computing enemy plan
+12:56:06.788 CONFIG | Vehicle 3
+12:56:06.788 CONFIG | 0 6 2 2 4 0 5 4 6 5 
+12:56:06.788 CONFIG | Vehicle 4
+12:56:06.788 CONFIG | 
+12:56:06.788 CONFIG | 3815 735
+12:56:06.788 CONFIG | Best cost: 6372.0
+12:56:06.788 CONFIG | Computing my plan
+12:56:11.338 CONFIG | Vehicle 3
+12:56:11.338 CONFIG | 1 3 6 3 6 1 
+12:56:11.338 CONFIG | Vehicle 4
+12:56:11.338 CONFIG | 
+12:56:11.338 CONFIG | 3730 820
+12:56:11.338 CONFIG | Best cost: 6545.0
+12:56:11.338 CONFIG | Minimal bid: 1165.0
+12:56:11.338 CONFIG | Marginal cost before changes: 949.0
+12:56:11.338 CONFIG | Probability: 0.08261425298962384
+12:56:11.338 CONFIG | Best enemy bid: 6372.0
+12:56:11.338 CONFIG | rate: -0.7000000000000002
+12:56:11.338 CONFIG | Marginal cost: 1665.95
+12:56:11.338 CONFIG | Minimal bid: 1165.0
+12:56:11.338 CONFIG | 2599
+12:56:11.338 CONFIG | 1665
+12:56:11.338 CONFIG | We won!!!
+12:56:11.338 CONFIG | Asking price for task: 7
+12:56:11.338 CONFIG | Computing enemy plan
+12:56:15.888 CONFIG | Vehicle 3
+12:56:15.888 CONFIG | 0 2 0 4 2 4 5 5 7 7 
+12:56:15.888 CONFIG | Vehicle 4
+12:56:15.888 CONFIG | 
+12:56:15.888 CONFIG | 3824 726
+12:56:15.888 CONFIG | Best cost: 7436.5
+12:56:15.888 CONFIG | Computing my plan
+12:56:20.438 CONFIG | Vehicle 3
+12:56:20.438 CONFIG | 7 6 3 1 7 3 6 1 
+12:56:20.438 CONFIG | Vehicle 4
+12:56:20.438 CONFIG | 
+12:56:20.438 CONFIG | 3686 864
+12:56:20.438 CONFIG | Best cost: 6545.0
+12:56:20.438 CONFIG | Minimal bid: 1064.5
+12:56:20.438 CONFIG | Marginal cost before changes: 0.0
+12:56:20.438 CONFIG | Probability: 0.09457233912911361
+12:56:20.438 CONFIG | Best enemy bid: 7436.5
+12:56:20.438 CONFIG | rate: -0.7000000000000002
+12:56:20.438 CONFIG | Marginal cost: 1522.2350000000001
+12:56:20.438 CONFIG | Minimal bid: 1064.5
+12:56:20.439 CONFIG | 1431
+12:56:20.439 CONFIG | 1522
+12:56:20.439 CONFIG | Enemy wins
+12:56:20.439 CONFIG | Asking price for task: 8
+12:56:20.439 CONFIG | Computing enemy plan
+12:56:24.989 CONFIG | Vehicle 3
+12:56:24.989 CONFIG | 0 2 0 4 2 4 5 5 7 8 8 7 
+12:56:24.989 CONFIG | Vehicle 4
+12:56:24.989 CONFIG | 
+12:56:24.989 CONFIG | 3817 733
+12:56:24.989 CONFIG | Best cost: 9884.5
+12:56:24.989 CONFIG | Computing my plan
+12:56:29.539 CONFIG | Vehicle 3
+12:56:29.539 CONFIG | 8 3 1 6 8 6 3 1 
+12:56:29.539 CONFIG | Vehicle 4
+12:56:29.539 CONFIG | 
+12:56:29.539 CONFIG | 3724 826
+12:56:29.539 CONFIG | Best cost: 6545.0
+12:56:29.539 CONFIG | Minimal bid: 1814.0
+12:56:29.539 CONFIG | Marginal cost before changes: 0.0
+12:56:29.539 CONFIG | Probability: 0.08292047730494015
+12:56:29.539 CONFIG | Best enemy bid: 9884.5
+12:56:29.539 CONFIG | rate: -0.8000000000000003
+12:56:29.539 CONFIG | Marginal cost: 2594.02
+12:56:29.539 CONFIG | Minimal bid: 1814.0
+12:56:29.540 CONFIG | 5545
+12:56:29.540 CONFIG | 2594
+12:56:29.540 CONFIG | We won!!!
+12:56:29.540 CONFIG | Asking price for task: 9
+12:56:29.540 CONFIG | Computing enemy plan
+12:56:34.090 CONFIG | Vehicle 3
+12:56:34.090 CONFIG | 9 9 2 0 0 4 2 4 5 5 7 7 
+12:56:34.090 CONFIG | Vehicle 4
+12:56:34.090 CONFIG | 
+12:56:34.090 CONFIG | 3893 657
+12:56:34.090 CONFIG | Best cost: 9136.5
+12:56:34.090 CONFIG | Computing my plan
+12:56:38.640 CONFIG | Vehicle 3
+12:56:38.640 CONFIG | 8 6 3 1 8 6 1 3 9 9 
+12:56:38.640 CONFIG | Vehicle 4
+12:56:38.640 CONFIG | 
+12:56:38.640 CONFIG | 3783 767
+12:56:38.640 CONFIG | Best cost: 7596.0
+12:56:38.640 CONFIG | Minimal bid: 850.0
+12:56:38.640 CONFIG | Marginal cost before changes: 1051.0
+12:56:38.640 CONFIG | Probability: 0.09979336705862668
+12:56:38.640 CONFIG | Best enemy bid: 9136.5
+12:56:38.640 CONFIG | rate: -0.8000000000000003
+12:56:38.640 CONFIG | Marginal cost: 1366.3
+12:56:38.640 CONFIG | Minimal bid: 850.0
+12:56:38.646 CONFIG | 3258
+12:56:38.646 CONFIG | 1366
+12:56:38.646 CONFIG | We won!!!
+12:56:38.647 CONFIG | Agent 1 has tasks [(Task 1, 3 kg, 2344 CHF, Manchester -> Norwich), (Task 3, 3 kg, 2023 CHF, Sheffield -> Portsmouth), (Task 6, 3 kg, 1665 CHF, Cardiff -> London), (Task 8, 3 kg, 2594 CHF, Plymouth -> Birmingham), (Task 9, 3 kg, 1366 CHF, Portsmouth -> Plymouth)]
+12:56:48.247 CONFIG | Vehicle 3
+12:56:48.247 CONFIG | 8 6 1 3 8 6 1 3 9 9 
+12:56:48.247 CONFIG | Vehicle 4
+12:56:48.247 CONFIG | 
+12:56:48.247 CONFIG | 7989 1611
+12:56:48.247 CONFIG | Best cost: 7596.0
+12:56:48.255 CONFIG | Wrote tournament/tour/auction-dummy-agent.xml
+12:56:48.292 INFO | LogistPlatform finished successfully!
+12:56:48.294 FINE | Run command: java -Xmx1024m -classpath ../logist/logist.jar logist.LogistPlatform -o tournament/tour/auction-agent-agent2.xml -a tournament/tour/agents.xml ./config/auction.xml agent agent2
+12:56:48.395 CONFIG | Reading ./config/auction.xml
+12:56:48.471 CONFIG | Reading config/settings_auction.xml
+12:56:48.558 CONFIG | Reading config/topology/england.xml
+12:56:48.585 CONFIG | Reading tournament/tour/agents.xml
+12:56:48.608 CONFIG | Reading config/settings_auction.xml
+12:56:48.642 CONFIG | Asking price for task: 0
+12:56:48.642 CONFIG | Computing enemy plan
+12:56:53.194 CONFIG | Vehicle 1
+12:56:53.194 CONFIG | 
+12:56:53.194 CONFIG | Vehicle 2
+12:56:53.194 CONFIG | 0 0 
+12:56:53.194 CONFIG | 3765 785
+12:56:53.196 CONFIG | Best cost: 2191.0
+12:56:53.196 CONFIG | Computing my plan
+12:56:57.746 CONFIG | Vehicle 1
+12:56:57.746 CONFIG | 
+12:56:57.746 CONFIG | Vehicle 2
+12:56:57.746 CONFIG | 0 0 
+12:56:57.746 CONFIG | 3492 1058
+12:56:57.746 CONFIG | Best cost: 2191.0
+12:56:57.746 CONFIG | Minimal bid: 1026.0
+12:56:57.746 CONFIG | Marginal cost before changes: 2191.0
+12:56:57.746 CONFIG | Probability: 0.1001106276073433
+12:56:57.747 CONFIG | Best enemy bid: 2191.0
+12:56:57.747 CONFIG | rate: -0.1
+12:56:57.747 CONFIG | Marginal cost: 2848.3
+12:56:57.747 CONFIG | Minimal bid: 1026.0
+12:57:06.849 CONFIG | Task from Cardiff and to Sheffield
+12:57:06.849 CONFIG | My marginal cost 2766.0 and estimate 2766.0
+12:57:06.849 CONFIG | 2848
+12:57:06.849 CONFIG | 2766
+12:57:06.849 CONFIG | Enemy wins
+12:57:06.850 CONFIG | Asking price for task: 1
+12:57:06.850 CONFIG | Computing enemy plan
+12:57:11.400 CONFIG | Vehicle 1
+12:57:11.400 CONFIG | 
+12:57:11.400 CONFIG | Vehicle 2
+12:57:11.400 CONFIG | 0 0 1 1 
+12:57:11.400 CONFIG | 3892 658
+12:57:11.400 CONFIG | Best cost: 4573.0
+12:57:11.400 CONFIG | Computing my plan
+12:57:15.950 CONFIG | Vehicle 1
+12:57:15.950 CONFIG | 1 1 
+12:57:15.950 CONFIG | Vehicle 2
+12:57:15.950 CONFIG | 
+12:57:15.950 CONFIG | 3546 1004
+12:57:15.950 CONFIG | Best cost: 2668.0
+12:57:15.950 CONFIG | Minimal bid: 1639.5
+12:57:15.950 CONFIG | Marginal cost before changes: 477.0
+12:57:15.950 CONFIG | Probability: 0.08262615763337533
+12:57:15.950 CONFIG | Best enemy bid: 4573.0
+12:57:15.950 CONFIG | rate: -0.4
+12:57:15.950 CONFIG | Marginal cost: 2344.485
+12:57:15.950 CONFIG | Minimal bid: 1639.5
+12:57:15.951 CONFIG | Winner is 1 my bid 2766 ennemy bid 2848
+12:57:25.051 CONFIG | Task from Manchester and to Norwich
+12:57:25.051 CONFIG | My marginal cost 1905.6000000000001 and estimate 3376.2082429501083
+12:57:25.052 CONFIG | 2344
+12:57:25.052 CONFIG | 2533
+12:57:25.052 CONFIG | We won!!!
+12:57:25.052 CONFIG | Asking price for task: 2
+12:57:25.052 CONFIG | Computing enemy plan
+12:57:29.602 CONFIG | Vehicle 1
+12:57:29.602 CONFIG | 0 2 0 2 
+12:57:29.602 CONFIG | Vehicle 2
+12:57:29.602 CONFIG | 
+12:57:29.602 CONFIG | 3813 737
+12:57:29.602 CONFIG | Best cost: 3493.5
+12:57:29.602 CONFIG | Computing my plan
+12:57:34.152 CONFIG | Vehicle 1
+12:57:34.152 CONFIG | 2 1 2 1 
+12:57:34.152 CONFIG | Vehicle 2
+12:57:34.152 CONFIG | 
+12:57:34.152 CONFIG | 3812 738
+12:57:34.152 CONFIG | Best cost: 4414.0
+12:57:34.152 CONFIG | Minimal bid: 1049.5
+12:57:34.152 CONFIG | Marginal cost before changes: 1746.0
+12:57:34.152 CONFIG | Probability: 0.09457233912911361
+12:57:34.152 CONFIG | Best enemy bid: 3493.5
+12:57:34.152 CONFIG | rate: -0.5
+12:57:34.152 CONFIG | Marginal cost: 2269.8
+12:57:34.152 CONFIG | Minimal bid: 1049.5
+12:57:34.153 CONFIG | Winner is 0 my bid 2533 ennemy bid 2344
+12:57:43.253 CONFIG | Task from Cardiff and to Manchester
+12:57:43.253 CONFIG | My marginal cost 742.5 and estimate 1569.1757592356275
+12:57:43.253 CONFIG | 2269
+12:57:43.253 CONFIG | 1177
+12:57:43.253 CONFIG | Enemy wins
+12:57:43.253 CONFIG | Asking price for task: 3
+12:57:43.253 CONFIG | Computing enemy plan
+12:57:47.803 CONFIG | Vehicle 1
+12:57:47.803 CONFIG | 0 2 0 3 2 3 
+12:57:47.803 CONFIG | Vehicle 2
+12:57:47.803 CONFIG | 
+12:57:47.803 CONFIG | 3794 756
+12:57:47.803 CONFIG | Best cost: 4932.0
+12:57:47.803 CONFIG | Computing my plan
+12:57:52.353 CONFIG | Vehicle 1
+12:57:52.353 CONFIG | 3 1 3 1 
+12:57:52.353 CONFIG | Vehicle 2
+12:57:52.353 CONFIG | 
+12:57:52.353 CONFIG | 3759 791
+12:57:52.353 CONFIG | Best cost: 3829.0
+12:57:52.353 CONFIG | Minimal bid: 1415.0
+12:57:52.353 CONFIG | Marginal cost before changes: -585.0
+12:57:52.353 CONFIG | Probability: 0.06782111603850108
+12:57:52.353 CONFIG | Best enemy bid: 4932.0
+12:57:52.353 CONFIG | rate: -0.5
+12:57:52.353 CONFIG | Marginal cost: 2023.4500000000003
+12:57:52.353 CONFIG | Minimal bid: 1415.0
+12:57:52.353 CONFIG | Winner is 1 my bid 1177 ennemy bid 2269
+12:58:01.453 CONFIG | Task from Sheffield and to Portsmouth
+12:58:01.453 CONFIG | My marginal cost 1150.8 and estimate 1469.813725698968
+12:58:01.453 CONFIG | 2023
+12:58:01.453 CONFIG | 1151
+12:58:01.453 CONFIG | Enemy wins
+12:58:01.453 CONFIG | Asking price for task: 4
+12:58:01.453 CONFIG | Computing enemy plan
+12:58:06.003 CONFIG | Vehicle 1
+12:58:06.003 CONFIG | 0 2 0 3 4 2 3 4 
+12:58:06.003 CONFIG | Vehicle 2
+12:58:06.003 CONFIG | 
+12:58:06.003 CONFIG | 3709 841
+12:58:06.003 CONFIG | Best cost: 5881.0
+12:58:06.003 CONFIG | Computing my plan
+12:58:10.553 CONFIG | Vehicle 1
+12:58:10.553 CONFIG | 4 1 1 4 
+12:58:10.553 CONFIG | Vehicle 2
+12:58:10.553 CONFIG | 
+12:58:10.553 CONFIG | 3712 838
+12:58:10.553 CONFIG | Best cost: 2668.0
+12:58:10.553 CONFIG | Minimal bid: 1813.0
+12:58:10.553 CONFIG | Marginal cost before changes: -1161.0
+12:58:10.553 CONFIG | Probability: 0.08262615763337533
+12:58:10.553 CONFIG | Best enemy bid: 5881.0
+12:58:10.553 CONFIG | rate: -0.7
+12:58:10.553 CONFIG | Marginal cost: 2592.59
+12:58:10.553 CONFIG | Minimal bid: 1813.0
+12:58:10.553 CONFIG | Winner is 1 my bid 1151 ennemy bid 2023
+12:58:19.653 CONFIG | Task from Liverpool and to Norwich
+12:58:19.653 CONFIG | My marginal cost 759.2 and estimate 1091.8049441698222
+12:58:19.654 CONFIG | 2592
+12:58:19.654 CONFIG | 819
+12:58:19.654 CONFIG | Enemy wins
+12:58:19.654 CONFIG | Asking price for task: 5
+12:58:19.654 CONFIG | Computing enemy plan
+12:58:24.204 CONFIG | Vehicle 1
+12:58:24.204 CONFIG | 2 0 2 4 3 0 5 4 5 3 
+12:58:24.204 CONFIG | Vehicle 2
+12:58:24.204 CONFIG | 
+12:58:24.204 CONFIG | 3699 851
+12:58:24.204 CONFIG | Best cost: 6082.0
+12:58:24.204 CONFIG | Computing my plan
+12:58:28.754 CONFIG | Vehicle 1
+12:58:28.754 CONFIG | 1 1 5 5 
+12:58:28.754 CONFIG | Vehicle 2
+12:58:28.754 CONFIG | 
+12:58:28.754 CONFIG | 3741 809
+12:58:28.754 CONFIG | Best cost: 3243.0
+12:58:28.754 CONFIG | Minimal bid: 575.0
+12:58:28.754 CONFIG | Marginal cost before changes: 575.0
+12:58:28.754 CONFIG | Probability: 0.08261425298962384
+12:58:28.754 CONFIG | Best enemy bid: 6082.0
+12:58:28.754 CONFIG | rate: -0.6
+12:58:28.754 CONFIG | Marginal cost: 747.5
+12:58:28.754 CONFIG | Minimal bid: 575.0
+12:58:28.755 CONFIG | Winner is 1 my bid 819 ennemy bid 2592
+12:58:37.855 CONFIG | Task from Norwich and to London
+12:58:37.855 CONFIG | My marginal cost 0.0 and estimate 500.0
+12:58:37.856 CONFIG | 747
+12:58:37.856 CONFIG | 450
+12:58:37.856 CONFIG | Enemy wins
+12:58:37.856 CONFIG | Asking price for task: 6
+12:58:37.856 CONFIG | Computing enemy plan
+12:58:42.406 CONFIG | Vehicle 1
+12:58:42.406 CONFIG | 0 6 2 2 4 0 3 4 5 5 6 3 
+12:58:42.406 CONFIG | Vehicle 2
+12:58:42.406 CONFIG | 
+12:58:42.406 CONFIG | 3557 993
+12:58:42.406 CONFIG | Best cost: 6082.0
+12:58:42.406 CONFIG | Computing my plan
+12:58:46.956 CONFIG | Vehicle 1
+12:58:46.956 CONFIG | 1 6 6 1 
+12:58:46.956 CONFIG | Vehicle 2
+12:58:46.956 CONFIG | 
+12:58:46.956 CONFIG | 3686 864
+12:58:46.956 CONFIG | Best cost: 3818.0
+12:58:46.956 CONFIG | Minimal bid: 1165.0
+12:58:46.956 CONFIG | Marginal cost before changes: 575.0
+12:58:46.956 CONFIG | Probability: 0.08261425298962384
+12:58:46.956 CONFIG | Best enemy bid: 6082.0
+12:58:46.956 CONFIG | rate: -0.7
+12:58:46.956 CONFIG | Marginal cost: 1665.95
+12:58:46.956 CONFIG | Minimal bid: 1165.0
+12:58:46.956 CONFIG | Winner is 1 my bid 450 ennemy bid 747
+12:58:56.056 CONFIG | Task from Cardiff and to London
+12:58:56.056 CONFIG | My marginal cost 0.0 and estimate 1607.0487436106791
+12:58:56.057 CONFIG | 1665
+12:58:56.057 CONFIG | 1447
+12:58:56.057 CONFIG | Enemy wins
+12:58:56.057 CONFIG | Asking price for task: 7
+12:58:56.057 CONFIG | Computing enemy plan
+12:59:00.607 CONFIG | Vehicle 1
+12:59:00.607 CONFIG | 6 0 2 2 4 0 3 6 5 4 5 3 
+12:59:00.607 CONFIG | Vehicle 2
+12:59:00.607 CONFIG | 7 7 
+12:59:00.607 CONFIG | 3510 1040
+12:59:00.607 CONFIG | Best cost: 7146.5
+12:59:00.607 CONFIG | Computing my plan
+12:59:05.157 CONFIG | Vehicle 1
+12:59:05.157 CONFIG | 
+12:59:05.157 CONFIG | Vehicle 2
+12:59:05.157 CONFIG | 7 7 1 1 
+12:59:05.157 CONFIG | 3784 766
+12:59:05.157 CONFIG | Best cost: 2704.0
+12:59:05.157 CONFIG | Minimal bid: 1064.5
+12:59:05.157 CONFIG | Marginal cost before changes: -1114.0
+12:59:05.157 CONFIG | Probability: 0.09457233912911361
+12:59:05.157 CONFIG | Best enemy bid: 7146.5
+12:59:05.157 CONFIG | rate: -1.4
+12:59:05.157 CONFIG | Marginal cost: 1522.2350000000001
+12:59:05.157 CONFIG | Minimal bid: 1064.5
+12:59:05.157 CONFIG | Winner is 1 my bid 1447 ennemy bid 1665
+12:59:14.257 CONFIG | Task from London and to Manchester
+12:59:14.257 CONFIG | My marginal cost 0.0 and estimate 768.9714235122922
+12:59:14.257 CONFIG | 1522
+12:59:14.257 CONFIG | 693
+12:59:14.257 CONFIG | Enemy wins
+12:59:14.257 CONFIG | Asking price for task: 8
+12:59:14.257 CONFIG | Computing enemy plan
+12:59:18.807 CONFIG | Vehicle 1
+12:59:18.807 CONFIG | 0 6 2 2 4 0 3 4 5 5 3 8 7 6 8 7 
+12:59:18.807 CONFIG | Vehicle 2
+12:59:18.807 CONFIG | 
+12:59:18.807 CONFIG | 3477 1073
+12:59:18.807 CONFIG | Best cost: 9220.5
+12:59:18.807 CONFIG | Computing my plan
+12:59:23.357 CONFIG | Vehicle 1
+12:59:23.357 CONFIG | 
+12:59:23.357 CONFIG | Vehicle 2
+12:59:23.357 CONFIG | 8 1 8 1 
+12:59:23.357 CONFIG | 3788 762
+12:59:23.357 CONFIG | Best cost: 5152.0
+12:59:23.357 CONFIG | Minimal bid: 1814.0
+12:59:23.357 CONFIG | Marginal cost before changes: 2448.0
+12:59:23.357 CONFIG | Probability: 0.08292047730494015
+12:59:23.357 CONFIG | Best enemy bid: 9220.5
+12:59:23.357 CONFIG | rate: -1.0999999999999999
+12:59:23.357 CONFIG | Marginal cost: 3182.4
+12:59:23.357 CONFIG | Minimal bid: 1814.0
+12:59:23.357 CONFIG | Winner is 1 my bid 693 ennemy bid 1522
+12:59:32.457 CONFIG | Task from Plymouth and to Birmingham
+12:59:32.457 CONFIG | My marginal cost 1451.2 and estimate 999.1411825851803
+12:59:32.457 CONFIG | 3182
+12:59:32.457 CONFIG | 900
+12:59:32.457 CONFIG | Enemy wins
+12:59:32.457 CONFIG | Asking price for task: 9
+12:59:32.457 CONFIG | Computing enemy plan
+12:59:37.007 CONFIG | Vehicle 1
+12:59:37.007 CONFIG | 0 6 2 2 4 0 3 4 5 5 7 6 3 9 8 9 8 7 
+12:59:37.007 CONFIG | Vehicle 2
+12:59:37.007 CONFIG | 
+12:59:37.007 CONFIG | 3458 1092
+12:59:37.007 CONFIG | Best cost: 9220.5
+12:59:37.007 CONFIG | Computing my plan
+12:59:41.557 CONFIG | Vehicle 1
+12:59:41.557 CONFIG | 1 1 
+12:59:41.557 CONFIG | Vehicle 2
+12:59:41.557 CONFIG | 9 9 
+12:59:41.557 CONFIG | 3784 766
+12:59:41.557 CONFIG | Best cost: 3892.0
+12:59:41.557 CONFIG | Minimal bid: 850.0
+12:59:41.557 CONFIG | Marginal cost before changes: -1260.0
+12:59:41.557 CONFIG | Probability: 0.09979336705862668
+12:59:41.557 CONFIG | Best enemy bid: 9220.5
+12:59:41.557 CONFIG | rate: -1.4999999999999998
+12:59:41.557 CONFIG | Marginal cost: 1215.5000000000002
+12:59:41.557 CONFIG | Minimal bid: 850.0
+12:59:41.557 CONFIG | Winner is 1 my bid 900 ennemy bid 3182
+12:59:50.657 CONFIG | Task from Portsmouth and to Plymouth
+12:59:50.657 CONFIG | My marginal cost 840.8000000000001 and estimate 3271.4561063074084
+12:59:50.659 CONFIG | 1215
+12:59:50.659 CONFIG | 2945
+12:59:50.659 CONFIG | We won!!!
+12:59:50.659 CONFIG | Agent 0 has tasks [(Task 1, 3 kg, 2344 CHF, Manchester -> Norwich), (Task 9, 3 kg, 1215 CHF, Portsmouth -> Plymouth)]
+01:00:00.259 CONFIG | Vehicle 1
+01:00:00.259 CONFIG | 1 1 
+01:00:00.259 CONFIG | Vehicle 2
+01:00:00.259 CONFIG | 9 9 
+01:00:00.259 CONFIG | 8012 1588
+01:00:00.259 CONFIG | Best cost: 3892.0
+01:00:00.262 CONFIG | Winner is 0 my bid 2945 ennemy bid 1215
+01:00:09.866 CONFIG | Wrote tournament/tour/auction-agent-agent2.xml
+01:00:09.910 INFO | LogistPlatform finished successfully!
+01:00:09.912 FINE | Run command: java -Xmx1024m -classpath ../logist/logist.jar logist.LogistPlatform -o tournament/tour/auction-agent-dummy.xml -a tournament/tour/agents.xml ./config/auction.xml agent dummy
+01:00:09.999 CONFIG | Reading ./config/auction.xml
+01:00:10.070 CONFIG | Reading config/settings_auction.xml
+01:00:10.143 CONFIG | Reading config/topology/england.xml
+01:00:10.168 CONFIG | Reading tournament/tour/agents.xml
+01:00:10.186 CONFIG | Reading config/settings_auction.xml
+01:00:10.209 CONFIG | Asking price for task: 0
+01:00:10.209 CONFIG | Computing enemy plan
+01:00:14.761 CONFIG | Vehicle 1
+01:00:14.761 CONFIG | 
+01:00:14.761 CONFIG | Vehicle 2
+01:00:14.761 CONFIG | 0 0 
+01:00:14.761 CONFIG | 3766 784
+01:00:14.762 CONFIG | Best cost: 2191.0
+01:00:14.762 CONFIG | Computing my plan
+01:00:19.312 CONFIG | Vehicle 1
+01:00:19.312 CONFIG | 
+01:00:19.312 CONFIG | Vehicle 2
+01:00:19.312 CONFIG | 0 0 
+01:00:19.312 CONFIG | 3645 905
+01:00:19.312 CONFIG | Best cost: 2191.0
+01:00:19.312 CONFIG | Minimal bid: 1026.0
+01:00:19.312 CONFIG | Marginal cost before changes: 2191.0
+01:00:19.312 CONFIG | Probability: 0.1001106276073433
+01:00:19.312 CONFIG | Best enemy bid: 2191.0
+01:00:19.312 CONFIG | rate: -0.1
+01:00:19.312 CONFIG | Marginal cost: 2848.3
+01:00:19.312 CONFIG | Minimal bid: 1026.0
+01:00:19.313 CONFIG | 2848
+01:00:19.313 CONFIG | 3415
+01:00:19.313 CONFIG | We won!!!
+01:00:19.313 CONFIG | Asking price for task: 1
+01:00:19.313 CONFIG | Computing enemy plan
+01:00:23.863 CONFIG | Vehicle 1
+01:00:23.863 CONFIG | 1 1 
+01:00:23.863 CONFIG | Vehicle 2
+01:00:23.863 CONFIG | 
+01:00:23.863 CONFIG | 3672 878
+01:00:23.863 CONFIG | Best cost: 2668.0
+01:00:23.863 CONFIG | Computing my plan
+01:00:28.413 CONFIG | Vehicle 1
+01:00:28.413 CONFIG | 
+01:00:28.413 CONFIG | Vehicle 2
+01:00:28.413 CONFIG | 0 0 1 1 
+01:00:28.413 CONFIG | 3798 752
+01:00:28.413 CONFIG | Best cost: 4573.0
+01:00:28.413 CONFIG | Minimal bid: 1639.5
+01:00:28.413 CONFIG | Marginal cost before changes: 2382.0
+01:00:28.413 CONFIG | Probability: 0.08262615763337533
+01:00:28.413 CONFIG | Best enemy bid: 2668.0
+01:00:28.413 CONFIG | rate: 0.20000000000000004
+01:00:28.413 CONFIG | Marginal cost: 3096.6
+01:00:28.413 CONFIG | Minimal bid: 1639.5
+01:00:28.414 CONFIG | 3096
+01:00:28.414 CONFIG | 3962
+01:00:28.414 CONFIG | We won!!!
+01:00:28.414 CONFIG | Asking price for task: 2
+01:00:28.414 CONFIG | Computing enemy plan
+01:00:32.964 CONFIG | Vehicle 1
+01:00:32.964 CONFIG | 
+01:00:32.964 CONFIG | Vehicle 2
+01:00:32.964 CONFIG | 2 2 
+01:00:32.964 CONFIG | 3665 885
+01:00:32.964 CONFIG | Best cost: 2214.5
+01:00:32.964 CONFIG | Computing my plan
+01:00:37.514 CONFIG | Vehicle 1
+01:00:37.514 CONFIG | 0 2 1 2 0 1 
+01:00:37.574 CONFIG | Vehicle 2
+01:00:37.574 CONFIG | 
+01:00:37.574 CONFIG | 3721 829
+01:00:37.574 CONFIG | Best cost: 5133.0
+01:00:37.574 CONFIG | Minimal bid: 1049.5
+01:00:37.574 CONFIG | Marginal cost before changes: 560.0
+01:00:37.574 CONFIG | Probability: 0.09457233912911361
+01:00:37.574 CONFIG | Best enemy bid: 2214.5
+01:00:37.574 CONFIG | rate: 0.10000000000000003
+01:00:37.574 CONFIG | Marginal cost: 1500.785
+01:00:37.574 CONFIG | Minimal bid: 1049.5
+01:00:37.574 CONFIG | 1500
+01:00:37.574 CONFIG | 3575
+01:00:37.574 CONFIG | We won!!!
+01:00:37.574 CONFIG | Asking price for task: 3
+01:00:37.574 CONFIG | Computing enemy plan
+01:00:42.065 CONFIG | Vehicle 1
+01:00:42.065 CONFIG | 3 3 
+01:00:42.065 CONFIG | Vehicle 2
+01:00:42.065 CONFIG | 
+01:00:42.065 CONFIG | 3615 935
+01:00:42.065 CONFIG | Best cost: 2114.0
+01:00:42.065 CONFIG | Computing my plan
+01:00:46.615 CONFIG | Vehicle 1
+01:00:46.615 CONFIG | 0 2 0 3 1 2 3 1 
+01:00:46.615 CONFIG | Vehicle 2
+01:00:46.615 CONFIG | 
+01:00:46.615 CONFIG | 3624 926
+01:00:46.615 CONFIG | Best cost: 5881.0
+01:00:46.615 CONFIG | Minimal bid: 1415.0
+01:00:46.615 CONFIG | Marginal cost before changes: 748.0
+01:00:46.615 CONFIG | Probability: 0.06782111603850108
+01:00:46.615 CONFIG | Best enemy bid: 2114.0
+01:00:46.615 CONFIG | rate: 0.5
+01:00:46.615 CONFIG | Marginal cost: 2334.7500000000005
+01:00:46.615 CONFIG | Minimal bid: 1415.0
+01:00:46.616 CONFIG | 2334
+01:00:46.616 CONFIG | 3800
+01:00:46.616 CONFIG | We won!!!
+01:00:46.616 CONFIG | Asking price for task: 4
+01:00:46.617 CONFIG | Computing enemy plan
+01:00:51.167 CONFIG | Vehicle 1
+01:00:51.167 CONFIG | 4 4 
+01:00:51.167 CONFIG | Vehicle 2
+01:00:51.167 CONFIG | 
+01:00:51.167 CONFIG | 3602 948
+01:00:51.167 CONFIG | Best cost: 2668.0
+01:00:51.167 CONFIG | Computing my plan
+01:00:55.717 CONFIG | Vehicle 1
+01:00:55.717 CONFIG | 0 2 1 2 4 0 3 3 1 4 
+01:00:55.717 CONFIG | Vehicle 2
+01:00:55.717 CONFIG | 
+01:00:55.717 CONFIG | 3636 914
+01:00:55.717 CONFIG | Best cost: 5881.0
+01:00:55.718 CONFIG | Minimal bid: 1813.0
+01:00:55.718 CONFIG | Marginal cost before changes: 0.0
+01:00:55.718 CONFIG | Probability: 0.08262615763337533
+01:00:55.718 CONFIG | Best enemy bid: 2668.0
+01:00:55.718 CONFIG | rate: 0.6000000000000001
+01:00:55.718 CONFIG | Marginal cost: 3190.8800000000006
+01:00:55.718 CONFIG | Minimal bid: 1813.0
+01:00:55.720 CONFIG | 3190
+01:00:55.720 CONFIG | 4302
+01:00:55.720 CONFIG | We won!!!
+01:00:55.720 CONFIG | Asking price for task: 5
+01:00:55.720 CONFIG | Computing enemy plan
+01:01:00.271 CONFIG | Vehicle 1
+01:01:00.271 CONFIG | 
+01:01:00.271 CONFIG | Vehicle 2
+01:01:00.271 CONFIG | 5 5 
+01:01:00.271 CONFIG | 3672 878
+01:01:00.271 CONFIG | Best cost: 1150.0
+01:01:00.271 CONFIG | Computing my plan
+01:01:04.821 CONFIG | Vehicle 1
+01:01:04.821 CONFIG | 0 2 1 2 4 0 3 5 4 1 5 3 
+01:01:04.821 CONFIG | Vehicle 2
+01:01:04.821 CONFIG | 
+01:01:04.821 CONFIG | 3555 995
+01:01:04.821 CONFIG | Best cost: 6082.0
+01:01:04.821 CONFIG | Minimal bid: 575.0
+01:01:04.821 CONFIG | Marginal cost before changes: 201.0
+01:01:04.821 CONFIG | Probability: 0.08261425298962384
+01:01:04.821 CONFIG | Best enemy bid: 1150.0
+01:01:04.821 CONFIG | rate: 0.7
+01:01:04.821 CONFIG | Marginal cost: 1075.25
+01:01:04.821 CONFIG | Minimal bid: 575.0
+01:01:04.822 CONFIG | 1075
+01:01:04.822 CONFIG | 2658
+01:01:04.822 CONFIG | We won!!!
+01:01:04.822 CONFIG | Asking price for task: 6
+01:01:04.822 CONFIG | Computing enemy plan
+01:01:09.372 CONFIG | Vehicle 1
+01:01:09.372 CONFIG | 
+01:01:09.372 CONFIG | Vehicle 2
+01:01:09.372 CONFIG | 6 6 
+01:01:09.372 CONFIG | 3670 880
+01:01:09.372 CONFIG | Best cost: 2330.0
+01:01:09.372 CONFIG | Computing my plan
+01:01:13.922 CONFIG | Vehicle 1
+01:01:13.922 CONFIG | 0 2 6 1 2 4 3 0 1 4 5 5 6 3 
+01:01:13.922 CONFIG | Vehicle 2
+01:01:13.922 CONFIG | 
+01:01:13.922 CONFIG | 3418 1132
+01:01:13.922 CONFIG | Best cost: 6082.0
+01:01:13.922 CONFIG | Minimal bid: 1165.0
+01:01:13.922 CONFIG | Marginal cost before changes: 0.0
+01:01:13.922 CONFIG | Probability: 0.08261425298962384
+01:01:13.922 CONFIG | Best enemy bid: 2330.0
+01:01:13.922 CONFIG | rate: 0.9
+01:01:13.922 CONFIG | Marginal cost: 2434.85
+01:01:13.922 CONFIG | Minimal bid: 1165.0
+01:01:13.925 CONFIG | 2434
+01:01:13.925 CONFIG | 4009
+01:01:13.925 CONFIG | We won!!!
+01:01:13.925 CONFIG | Asking price for task: 7
+01:01:13.925 CONFIG | Computing enemy plan
+01:01:18.475 CONFIG | Vehicle 1
+01:01:18.475 CONFIG | 
+01:01:18.475 CONFIG | Vehicle 2
+01:01:18.475 CONFIG | 7 7 
+01:01:18.475 CONFIG | 3681 869
+01:01:18.475 CONFIG | Best cost: 1064.5
+01:01:18.475 CONFIG | Computing my plan
+01:01:23.025 CONFIG | Vehicle 1
+01:01:23.025 CONFIG | 0 6 2 1 2 4 3 0 1 4 5 6 5 3 
+01:01:23.025 CONFIG | Vehicle 2
+01:01:23.025 CONFIG | 7 7 
+01:01:23.025 CONFIG | 3378 1172
+01:01:23.025 CONFIG | Best cost: 7146.5
+01:01:23.025 CONFIG | Minimal bid: 1064.5
+01:01:23.025 CONFIG | Marginal cost before changes: 1064.5
+01:01:23.025 CONFIG | Probability: 0.09457233912911361
+01:01:23.025 CONFIG | Best enemy bid: 1064.5
+01:01:23.026 CONFIG | rate: 0.7
+01:01:23.026 CONFIG | Marginal cost: 1809.6499999999999
+01:01:23.026 CONFIG | Minimal bid: 1064.5
+01:01:23.026 CONFIG | 1809
+01:01:23.027 CONFIG | 2467
+01:01:23.027 CONFIG | We won!!!
+01:01:23.027 CONFIG | Asking price for task: 8
+01:01:23.027 CONFIG | Computing enemy plan
+01:01:27.577 CONFIG | Vehicle 1
+01:01:27.577 CONFIG | 
+01:01:27.577 CONFIG | Vehicle 2
+01:01:27.577 CONFIG | 8 8 
+01:01:27.577 CONFIG | 3632 918
+01:01:27.577 CONFIG | Best cost: 3038.0
+01:01:27.577 CONFIG | Computing my plan
+01:01:32.127 CONFIG | Vehicle 1
+01:01:32.127 CONFIG | 0 2 6 1 2 4 3 0 1 4 5 8 3 6 7 5 8 7 
+01:01:32.127 CONFIG | Vehicle 2
+01:01:32.127 CONFIG | 
+01:01:32.127 CONFIG | 3339 1211
+01:01:32.127 CONFIG | Best cost: 9220.5
+01:01:32.127 CONFIG | Minimal bid: 1814.0
+01:01:32.127 CONFIG | Marginal cost before changes: 2074.0
+01:01:32.127 CONFIG | Probability: 0.08292047730494015
+01:01:32.127 CONFIG | Best enemy bid: 3038.0
+01:01:32.127 CONFIG | rate: 1.0
+01:01:32.127 CONFIG | Marginal cost: 4148.0
+01:01:32.127 CONFIG | Minimal bid: 1814.0
+01:01:32.127 CONFIG | 4148
+01:01:32.127 CONFIG | 2287
+01:01:32.127 CONFIG | Enemy wins
+01:01:32.127 CONFIG | Asking price for task: 9
+01:01:32.127 CONFIG | Computing enemy plan
+01:01:36.677 CONFIG | Vehicle 1
+01:01:36.677 CONFIG | 9 8 9 8 
+01:01:36.677 CONFIG | Vehicle 2
+01:01:36.677 CONFIG | 
+01:01:36.677 CONFIG | 3900 650
+01:01:36.677 CONFIG | Best cost: 4778.0
+01:01:36.677 CONFIG | Computing my plan
+01:01:41.227 CONFIG | Vehicle 1
+01:01:41.227 CONFIG | 0 6 2 2 1 4 0 3 5 1 4 5 6 3 9 9 
+01:01:41.227 CONFIG | Vehicle 2
+01:01:41.227 CONFIG | 7 7 
+01:01:41.227 CONFIG | 3436 1114
+01:01:41.227 CONFIG | Best cost: 7996.5
+01:01:41.227 CONFIG | Minimal bid: 850.0
+01:01:41.227 CONFIG | Marginal cost before changes: -1224.0
+01:01:41.227 CONFIG | Probability: 0.09979336705862668
+01:01:41.227 CONFIG | Best enemy bid: 4778.0
+01:01:41.227 CONFIG | rate: 0.6999999999999998
+01:01:41.227 CONFIG | Marginal cost: 1589.5
+01:01:41.227 CONFIG | Minimal bid: 850.0
+01:01:41.228 CONFIG | 1589
+01:01:41.228 CONFIG | 1955
+01:01:41.228 CONFIG | We won!!!
+01:01:41.228 CONFIG | Agent 0 has tasks [(Task 0, 3 kg, 2848 CHF, Cardiff -> Sheffield), (Task 1, 3 kg, 3096 CHF, Manchester -> Norwich), (Task 2, 3 kg, 1500 CHF, Cardiff -> Manchester), (Task 3, 3 kg, 2334 CHF, Sheffield -> Portsmouth), (Task 4, 3 kg, 3190 CHF, Liverpool -> Norwich), (Task 5, 3 kg, 1075 CHF, Norwich -> London), (Task 6, 3 kg, 2434 CHF, Cardiff -> London), (Task 7, 3 kg, 1809 CHF, London -> Manchester), (Task 9, 3 kg, 1589 CHF, Portsmouth -> Plymouth)]
+01:01:50.828 CONFIG | Vehicle 1
+01:01:50.828 CONFIG | 6 0 2 2 1 4 3 0 1 4 5 6 5 9 3 9 
+01:01:50.828 CONFIG | Vehicle 2
+01:01:50.828 CONFIG | 7 7 
+01:01:50.828 CONFIG | 7100 2500
+01:01:50.828 CONFIG | Best cost: 7996.5
+01:01:50.843 CONFIG | Wrote tournament/tour/auction-agent-dummy.xml
+01:01:50.893 INFO | LogistPlatform finished successfully!

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<agents>
+	<!-- An auto-generated list of agents and their behavior classes -->
+	<!--  - jar directory : ./agents/ -->
+	<!--  - generated on  : Fri Nov 22 00:48:21 CET 2019 -->
+	<agent name="agent2">
+		<set class-path="./agents/agent2.jar"/>
+		<set class-name="AuctionAgent"/>
+	</agent>
+	<agent name="dummy">
+		<set class-path="./agents/dummy.jar"/>
+		<set class-name="auction.DummyAgent"/>
+	</agent>
+	<agent name="agent">
+		<set class-path="./agents/agent.jar"/>
+		<set class-name="auction.AuctionAgent"/>
+	</agent>
+</agents>
