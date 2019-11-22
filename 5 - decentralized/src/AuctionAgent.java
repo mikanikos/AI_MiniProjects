@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 
 import logist.LogistPlatform;
@@ -15,7 +14,6 @@ import logist.task.Task;
 import logist.task.TaskDistribution;
 import logist.task.TaskSet;
 import logist.topology.Topology;
-import logist.topology.Topology.City;
 
 /**
  * The auction agent
@@ -25,11 +23,13 @@ public class AuctionAgent implements AuctionBehavior{
 
 	private static final double PREDICTION_ERROR_MEAN_NUMBER = 5;
 	private static final double FIRST_ROUNDS_LIMIT = 5;
-	private static final double SAFETY_BID_FROM_ENNEMY_FIRST_ROUNDS = 0.75;
+	private static final double INCREASE_GAIN_FIRST_ROUND = 1.1;
+	private static final double INCREASE_GAIN = 1.2;
 	private static final double SAFETY_BID_FROM_ENNEMY = 0.9;
 	private static final double TASK_INTEREST_PROBA_THRESHOLD = 0.09;
 	private static final double TASK_INTEREST_REDUCE_FACTOR = 0.8;
 	private static final double ERROR_OUTLIER_VALUE = 0.33;
+	private static final double ALLOWED_RISK_FACTOR = 0.85;
 
 	private Topology topology;
 	private TaskDistribution distribution;
@@ -101,10 +101,10 @@ public class AuctionAgent implements AuctionBehavior{
 
 			if (marginalCost <= 0) {
 				double distanceSum = task.pickupCity.distanceTo(task.deliveryCity);
-				marginalCost = (distanceSum * highestCostPerKm);
+				marginalCost = distanceSum * highestCostPerKm;
 			}
 
-			if(id != ennemyId) {
+			//if(id != ennemyId) {
 				double maxProbInterest = 0.0;
 				for (Task t : currentSolution.getTasks()) {
 					double p = distribution.probability(t.deliveryCity, task.pickupCity);
@@ -115,7 +115,7 @@ public class AuctionAgent implements AuctionBehavior{
 				if (maxProbInterest > TASK_INTEREST_PROBA_THRESHOLD) {
 					marginalCost *= TASK_INTEREST_REDUCE_FACTOR;
 				}
-			}
+			//}
 
 			if(id == ennemyId) {
 				ennemyMarginalCost = marginalCost;
@@ -124,7 +124,7 @@ public class AuctionAgent implements AuctionBehavior{
 				if(ennemyMarginalCost < minimumEnemyBid)
 					ennemyMarginalCost = minimumEnemyBid;
 
-				if(ennemyMarginalCost > 0) {
+				if(marginalCost > 0) {
 					ennemyEstimatedBid = marginalCost;
 				}else {
 					ennemyEstimatedBid = -1;
@@ -145,31 +145,31 @@ public class AuctionAgent implements AuctionBehavior{
 			
 			if(moneyDif > marginalCostDif) {
 				myMarginalCost -= marginalCostDif;
+			}else {
+				myMarginalCost *= ALLOWED_RISK_FACTOR;
 			}
-
-			myMarginalCost = Math.min(myMarginalCost * 0.85, myMarginalCost);
 
 		} else { //Try to get has much money has possible
 			double newMarginalCost;
 			
 			if(currentRound < FIRST_ROUNDS_LIMIT) {
-				newMarginalCost = myMarginalCost * (1  + 0.1);
+				newMarginalCost = myMarginalCost * INCREASE_GAIN_FIRST_ROUND;
 			}else {
-				newMarginalCost = myMarginalCost * (1 + 0.2);
+				newMarginalCost = myMarginalCost * INCREASE_GAIN;
 			}
 
-			newMarginalCost = Math.min(ennemyMarginalCost * 0.9, newMarginalCost);
+			newMarginalCost = Math.min(ennemyMarginalCost * SAFETY_BID_FROM_ENNEMY, newMarginalCost);
 
 			if(newMarginalCost > myMarginalCost)
 				myMarginalCost = newMarginalCost;
 		}
 
-		long bid = (long)Math.ceil(myMarginalCost);
-
-		if(bid <= 0) {
-			bid = minimumEnemyBid;
+		if(myMarginalCost <= 0) {
+			myMarginalCost = minimumEnemyBid * SAFETY_BID_FROM_ENNEMY;
 		}
-		
+
+		long bid = (long)Math.ceil(myMarginalCost);
+	
 		return bid;
 	}
 
@@ -182,7 +182,6 @@ public class AuctionAgent implements AuctionBehavior{
 		Long winnerMoney = availableMoney.get(lastWinner);
 		winnerMoney += lastOffers[lastWinner];
 		availableMoney.put(lastWinner, winnerMoney);
-		
 		
 		if(lastOffers[ennemyId] < minimumEnemyBid)
 			minimumEnemyBid = lastOffers[ennemyId];
